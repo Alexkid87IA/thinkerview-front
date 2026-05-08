@@ -3991,7 +3991,7 @@
 
 @media (max-width: 480px) {
   .header .inner { padding-top: 10px; padding-bottom: 10px; }
-  .logoImg { width: 28px; height: 28px; }
+  .logoImg { width: 56px; height: 56px; padding: 5px; border-radius: 12px; }
   .title { font-size: 24px; }
   .tagline { font-size: 16px; }
   .pillar { padding: 10px 14px; }
