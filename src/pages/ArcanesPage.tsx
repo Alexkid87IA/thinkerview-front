@@ -770,9 +770,6 @@ export default function ArcanesPage() {
             <img src={FEATURED.img} alt="" className={s.mainBgImg} />
             <div className={s.mainGradient} />
             {FEATURED.isNew && <span className={s.badge}>Nouveau</span>}
-            <div className={s.mainPlayWrap}>
-              <div className={s.mainPlayBtn}><Play /></div>
-            </div>
             <div className={s.mainContent}>
               <div className={s.mainKicker}>
                 <span className={s.mainTag}>{FEATURED.category}</span>
