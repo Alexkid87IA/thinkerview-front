@@ -890,7 +890,7 @@ export default function ArcanesPage() {
 
       {/* ══════════ DERNIÈRE INTERVIEW ══════════ */}
       <section className={s.spotlightSection}>
-        <div className={s.spotlightLink} onClick={() => !videoPlaying && setVideoPlaying(true)} style={{ cursor: videoPlaying ? 'default' : 'pointer' }}>
+        <div className={`${s.spotlightLink} ${videoPlaying ? s.spotlightPlaying : ''}`} onClick={() => !videoPlaying && setVideoPlaying(true)} style={{ cursor: videoPlaying ? 'default' : 'pointer' }}>
           {videoPlaying ? (
             <div className={s.spotlightVideoWrap}>
               <iframe

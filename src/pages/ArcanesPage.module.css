@@ -2204,6 +2204,10 @@
   border: 2px solid rgba(240, 237, 230, 0.15);
 }
 
+.spotlightPlaying {
+  min-height: 0 !important;
+}
+
 .spotlightVideoWrap {
   position: relative;
   width: 100%;
