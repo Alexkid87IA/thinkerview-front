@@ -219,17 +219,16 @@ export default function PitchPage() {
 
         <hr className={s.rule} />
 
-        <div className={s.ctaSection}>
-          <span className={s.ctaLabel}>La maquette est prête — clique pour la découvrir.</span>
-          <Link to="/home" className={s.ctaBtn}>
-            Découvrir la maquette <ArrowRight />
-          </Link>
-        </div>
-
         <footer className={s.footer}>
           <p className={s.footerText}>Alex Quilghini · alex@origines.media</p>
         </footer>
 
+      </div>
+
+      <div className={s.stickyBar}>
+        <Link to="/home" className={s.ctaBtn}>
+          Découvrir la maquette <ArrowRight />
+        </Link>
       </div>
     </div>
   );
