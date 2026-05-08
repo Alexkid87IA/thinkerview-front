@@ -142,14 +142,14 @@ const PILLARS = GALAXIES.map(g => ({ label: g.label, title: g.title, text: g.tex
 // ─── Mock Data ───────────────────────────────────────────────
 
 const FEATURED = {
-  title: 'La guerre invisible : comment la France perd sa souveraineté numérique',
-  guest: 'Général (2S) François Delattre',
-  role: 'Ancien directeur du renseignement militaire',
+  title: 'Off Investigation : censure, Bolloré et la refondation des médias',
+  guest: 'Jean-Baptiste Rivoir',
+  role: `Fondateur d'Off Investigation, ex-Canal+`,
   category: 'Souveraineté',
-  date: '5 mai 2026',
-  duration: '2h34',
+  date: '7 mai 2026',
+  duration: '1h11',
   isNew: true,
-  img: 'https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  img: '/rivoir-cover.png',
 };
 
 const BAROMETRE = {
@@ -162,30 +162,38 @@ const BAROMETRE = {
   ],
 };
 
-const ARTICLES = [
-  { slug: 'cyberattaque-apt28', category: 'Technologie', title: 'APT28 : anatomie de la cyberattaque contre le ministère des Armées', readTime: '12 min', author: 'Marion Leblanc', img: 'https://images.pexels.com/photos/5240541/pexels-photo-5240541.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { slug: 'nucleaire-epr2', category: 'Énergie', title: `EPR2 : pourquoi la France mise tout sur le nucléaire de nouvelle génération`, readTime: '9 min', author: 'Thomas Renaud', img: 'https://images.pexels.com/photos/18334961/pexels-photo-18334961.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { slug: 'dette-publique-3500', category: 'Économie', title: `3 500 milliards : la dette française est-elle encore soutenable ?`, readTime: '14 min', author: 'Claire Fontaine', img: 'https://images.pexels.com/photos/26743048/pexels-photo-26743048.jpeg?auto=compress&cs=tinysrgb&w=800' },
+const ARTICLES_COMPRENDRE = [
+  { slug: 'concentration-medias', category: 'Politique', title: `Concentration des médias : qui possède l'information en France ?`, readTime: '14 min', author: 'Claire Fontaine', img: 'https://picsum.photos/seed/medias-france/400/260' },
+  { slug: 'lobbies-bruxelles', category: 'Politique', title: `Lobbies à Bruxelles : qui influence vraiment les lois européennes ?`, readTime: '15 min', author: 'Marion Leblanc', img: 'https://picsum.photos/seed/lobbies-bruxelles/400/260' },
+  { slug: 'sahel-bilan', category: 'Géopolitique', title: `Sahel : le vrai bilan du retrait français, un an après`, readTime: '16 min', author: 'Marion Leblanc', img: 'https://picsum.photos/seed/sahel-retrait/400/260' },
+];
+
+const ARTICLES_LIRE = [
+  { slug: 'nucleaire-epr2', category: 'Énergie', title: `EPR2 : pourquoi la France mise tout sur le nucléaire de nouvelle génération`, readTime: '9 min', author: 'Thomas Renaud', img: 'https://picsum.photos/seed/epr2-reactor/400/260' },
+  { slug: 'ia-souveraine', category: 'Technologie', title: `IA souveraine : la France peut-elle rattraper les États-Unis ?`, readTime: '10 min', author: 'Thomas Renaud', img: 'https://picsum.photos/seed/ia-france/400/260' },
+  { slug: 'dette-publique-3500', category: 'Économie', title: `3 500 milliards : la dette française est-elle encore soutenable ?`, readTime: '14 min', author: 'Claire Fontaine', img: 'https://picsum.photos/seed/dette-3500/400/260' },
 ];
 
 const VIDEOS = [
-  { slug: 'delattre-souverainete', title: 'François Delattre — Souveraineté numérique', duration: '2h34', category: 'Souveraineté' },
+  { slug: 'rivoir-off-investigation', title: 'Jean-Baptiste Rivoir — Off Investigation : censure et refondation', duration: '1h11', category: 'Souveraineté' },
   { slug: 'jancovici-energie', title: 'Jean-Marc Jancovici — Transition ou effondrement ?', duration: '1h52', category: 'Énergie' },
   { slug: 'laidi-geopolitique', title: 'Zaki Laïdi — Le piège des sanctions occidentales', duration: '1h28', category: 'Géopolitique' },
 ];
 
 const LAST_INTERVIEW = {
-  slug: 'delattre-souverainete',
-  headline: 'La guerre invisible : comment la France',
-  headlineEm: 'perd sa souveraineté numérique',
-  guest: 'Général (2S) François Delattre',
-  guestRole: 'Ancien directeur du renseignement militaire',
-  excerpt: `Ancien directeur du renseignement militaire, il décrypte les nouvelles menaces cyber, le retard français en matière de cloud souverain et les alliances à nouer pour reprendre le contrôle. Un entretien fleuve de 2h34 où rien n'est éludé.`,
+  slug: 'rivoir-off-investigation',
+  headline: 'Off Investigation : censure, Bolloré et la',
+  headlineEm: 'refondation des médias',
+  guest: 'Jean-Baptiste Rivoir',
+  guestRole: 'Fondateur d\'Off Investigation, ex-Canal+',
+  excerpt: `30 ans de journalisme d'investigation, 5 ans de placard chez Canal+, 800 journalistes bâillonnés par des clauses de silence. Rivoir raconte tout : l'arrivée de Bolloré, la censure du Crédit Mutuel, et la construction d'un média 100% citoyen.`,
   category: 'Souveraineté',
-  duration: '2h34',
-  timeLabel: 'il y a 2 jours',
-  episodeNum: 412,
-  img: 'https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  duration: '1h11',
+  timeLabel: 'il y a 1 jour',
+  episodeNum: 413,
+  img: '/rivoir-cover.png',
+  imgMobile: '/rivoir-mobile.png',
+  youtubeId: 'dN6omRcGQP4',
 };
 
 const DOSSIERS = [
@@ -441,6 +449,7 @@ export default function ArcanesPage() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [tagsOpen, setTagsOpen] = useState(false);
   const [footerTab, setFooterTab] = useState<'galaxies' | 'formats' | 'apropos'>('galaxies');
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const pillarRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
@@ -642,9 +651,9 @@ export default function ArcanesPage() {
           Zéro bot, zéro manipulation, zéro censure — une communauté de citoyens qui pensent par eux-mêmes.
         </motion.p>
 
-        {/* ── Citation Einstein ── */}
-        <motion.div className={s.quoteStrip} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}>
-          <img src="/einstein.jpg" alt="Albert Einstein" className={s.quoteLogo} />
+        {/* ── Citation ── */}
+        <motion.div className={s.quoteStrip} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.9 }}>
+          <img src="/einstein.jpg" alt="Albert Einstein" className={s.quoteAvatar} />
           <blockquote className={s.quoteText}>
             «&nbsp;Il ne faut pas compter sur ceux qui créent les problèmes pour les résoudre.&nbsp;»
           </blockquote>
@@ -706,7 +715,7 @@ export default function ArcanesPage() {
 
         <div className={s.heroGrid}>
           {/* ── COL 1 : Interview immersive (pleine hauteur) ── */}
-          <a href={`/video/delattre-souverainete`} className={s.mainCol}>
+          <a href={`/article/rivoir-off-investigation`} className={s.mainCol}>
             <img src={FEATURED.img} alt="" className={s.mainBgImg} />
             <div className={s.mainGradient} />
             {FEATURED.isNew && <span className={s.badge}>Nouveau</span>}
@@ -769,7 +778,7 @@ export default function ArcanesPage() {
                 <span className={s.blockLabel}>Comprendre</span>
                 <a href="/articles" className={s.blockLink}>Tout voir <ArrowRight /></a>
               </div>
-              {ARTICLES.map(a => (
+              {ARTICLES_COMPRENDRE.map(a => (
                 <a key={a.slug} href={`/article/${a.slug}`} className={s.articleItem}>
                   <div className={s.articleItemThumb}>
                     <img src={a.img} alt="" className={s.articleItemImg} />
@@ -792,7 +801,7 @@ export default function ArcanesPage() {
                 <span className={s.blockLabel}>Lire</span>
                 <a href="/articles" className={s.blockLink}>Tout voir <ArrowRight /></a>
               </div>
-              {ARTICLES.map(a => (
+              {ARTICLES_LIRE.map(a => (
                 <a key={a.slug} href={`/article/${a.slug}`} className={s.articleItem}>
                   <div className={s.articleItemThumb}>
                     <img src={a.img} alt="" className={s.articleItemImg} />
@@ -881,60 +890,77 @@ export default function ArcanesPage() {
 
       {/* ══════════ DERNIÈRE INTERVIEW ══════════ */}
       <section className={s.spotlightSection}>
-        <a href={`/video/${LAST_INTERVIEW.slug}`} className={s.spotlightLink}>
-          <div className={s.spotlightBg}>
-            <img src={LAST_INTERVIEW.img} alt="" className={s.spotlightBgImg} aria-hidden="true" />
-            <div className={s.spotlightOverlay} aria-hidden="true" />
-            <div className={s.spotlightNoise} aria-hidden="true" />
-          </div>
+        <div className={s.spotlightLink} onClick={() => !videoPlaying && setVideoPlaying(true)} style={{ cursor: videoPlaying ? 'default' : 'pointer' }}>
+          {videoPlaying ? (
+            <div className={s.spotlightVideoWrap}>
+              <iframe
+                src={`https://www.youtube.com/embed/${LAST_INTERVIEW.youtubeId}?autoplay=1&rel=0`}
+                title={LAST_INTERVIEW.headline}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className={s.spotlightIframe}
+              />
+            </div>
+          ) : (
+            <>
+              <div className={s.spotlightBg}>
+                <picture>
+                  <source media="(max-width: 640px)" srcSet={LAST_INTERVIEW.imgMobile} />
+                  <img src={LAST_INTERVIEW.img} alt="" className={s.spotlightBgImg} aria-hidden="true" />
+                </picture>
+                <div className={s.spotlightOverlay} aria-hidden="true" />
+                <div className={s.spotlightNoise} aria-hidden="true" />
+              </div>
 
-          <div className={s.spotlightContent}>
-            <div className={s.spotlightTop}>
-              <div className={`${s.sectionHeader} ${s.sectionHeaderLight}`}>
-                <div className={s.chapterMark}>
-                  <span className={s.chNum}>Ch.02</span>
-                  <span className={s.chSep}>/</span>
-                  <span className={s.chLabel}>{`Dernière interview`}</span>
+              <div className={s.spotlightContent}>
+                <div className={s.spotlightTop}>
+                  <div className={`${s.sectionHeader} ${s.sectionHeaderLight}`}>
+                    <div className={s.chapterMark}>
+                      <span className={s.chNum}>Ch.02</span>
+                      <span className={s.chSep}>/</span>
+                      <span className={s.chLabel}>{`Dernière interview`}</span>
+                    </div>
+                    <h2 className={s.sectionTitle}>Voir, écouter, <em>comprendre</em>.</h2>
+                    <p className={s.sectionDesc}>{`Des entretiens longs, sans coupure, sans filtre — pour aller au fond des sujets.`}</p>
+                    <a href="/videos" className={s.sectionLink} onClick={e => e.stopPropagation()}>Toutes les interviews <ArrowRight /></a>
+                  </div>
+                  <span className={s.spotlightEpisode}>
+                    Épisode #{LAST_INTERVIEW.episodeNum}
+                  </span>
                 </div>
-                <h2 className={s.sectionTitle}>Voir, écouter, <em>comprendre</em>.</h2>
-                <p className={s.sectionDesc}>{`Des entretiens longs, sans coupure, sans filtre — pour aller au fond des sujets.`}</p>
-                <a href="/videos" className={s.sectionLink}>Toutes les interviews <ArrowRight /></a>
-              </div>
-              <span className={s.spotlightEpisode}>
-                Épisode #{LAST_INTERVIEW.episodeNum}
-              </span>
-            </div>
 
-            <div className={s.spotlightCenter}>
-              <span className={s.spotlightPlayRing}>
-                <Play />
-              </span>
-              <span className={s.spotlightDuration}>{LAST_INTERVIEW.duration}</span>
-            </div>
+                <div className={s.spotlightCenter}>
+                  <span className={s.spotlightPlayRing}>
+                    <Play />
+                  </span>
+                  <span className={s.spotlightDuration}>{LAST_INTERVIEW.duration}</span>
+                </div>
 
-            <div className={s.spotlightBottom}>
-              <div className={s.spotlightEditorial}>
-                <span className={s.spotlightMeta}>
-                  <span className={s.spotlightDot} aria-hidden="true" />
-                  {LAST_INTERVIEW.timeLabel}
-                  <span className={s.spotlightMetaSep}>·</span>
-                  Interview · {LAST_INTERVIEW.category}
-                </span>
-                <h2 className={s.spotlightH}>
-                  {LAST_INTERVIEW.headline} <em>{LAST_INTERVIEW.headlineEm}</em>.
-                </h2>
-                <p className={s.spotlightExcerpt}>{LAST_INTERVIEW.excerpt}</p>
-              </div>
-              <div className={s.spotlightGuest}>
-                <div className={s.spotlightAvatar} aria-hidden="true" />
-                <div className={s.spotlightGuestInfo}>
-                  <span className={s.spotlightGuestName}>{LAST_INTERVIEW.guest}</span>
-                  <span className={s.spotlightGuestRole}>{LAST_INTERVIEW.guestRole}</span>
+                <div className={s.spotlightBottom}>
+                  <div className={s.spotlightEditorial}>
+                    <span className={s.spotlightMeta}>
+                      <span className={s.spotlightDot} aria-hidden="true" />
+                      {LAST_INTERVIEW.timeLabel}
+                      <span className={s.spotlightMetaSep}>·</span>
+                      Interview · {LAST_INTERVIEW.category}
+                    </span>
+                    <h2 className={s.spotlightH}>
+                      {LAST_INTERVIEW.headline} <em>{LAST_INTERVIEW.headlineEm}</em>.
+                    </h2>
+                    <p className={s.spotlightExcerpt}>{LAST_INTERVIEW.excerpt}</p>
+                  </div>
+                  <div className={s.spotlightGuest}>
+                    <img src={LAST_INTERVIEW.imgMobile} alt={LAST_INTERVIEW.guest} className={s.spotlightAvatarImg} />
+                    <div className={s.spotlightGuestInfo}>
+                      <span className={s.spotlightGuestName}>{LAST_INTERVIEW.guest}</span>
+                      <span className={s.spotlightGuestRole}>{LAST_INTERVIEW.guestRole}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </a>
+            </>
+          )}
+        </div>
       </section>
 
       {/* ══════════ COMPRENDRE ══════════ */}

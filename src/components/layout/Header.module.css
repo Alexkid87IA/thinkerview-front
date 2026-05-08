@@ -410,7 +410,162 @@
   .menuBtn { display: inline-flex; }
 }
 
+@media (max-width: 880px) {
+  .logoImg { width: 52px; height: 52px; }
+}
+
 @media (max-width: 480px) {
   .header .inner { padding-top: 10px; padding-bottom: 10px; }
-  .logoImg { width: 28px; height: 28px; }
+  .logoImg { width: 44px; height: 44px; padding: 4px; border-radius: 10px; }
 }
+
+/* ── Mobile menu ── */
+
+.mobileMenu {
+  display: none;
+}
+
+.mobileMenuOpen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: #F0EDE6;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobileMenuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--side);
+  border-bottom: 1px solid #E0DCD4;
+  flex-shrink: 0;
+}
+
+.mobileMenuClose {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #C8C3BA;
+  background: none;
+  color: #0A0A0A;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mobileMenuClose svg { width: 18px; height: 18px; }
+
+.mobileMenuBody {
+  flex: 1;
+  padding: 24px var(--side);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #E8E5DE;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: #0A0A0A;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobileNavLink:hover { color: #8A8780; }
+
+.mobileNavLink svg {
+  width: 14px;
+  height: 14px;
+  color: #C8C3BA;
+}
+
+.mobileGalaxies {
+  padding: 24px 0;
+  border-bottom: 1px solid #E8E5DE;
+}
+
+.mobileGalaxiesLabel {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A8780;
+  margin-bottom: 16px;
+}
+
+.mobileGalaxiesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.mobileGalaxyLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #E8E5DE;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.mobileGalaxyLink:hover { background: rgba(10, 10, 10, 0.02); border-color: #D5D0C8; }
+
+.mobileGalaxyDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mobileGalaxyName {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  color: #0A0A0A;
+}
+
+.mobileMenuFooter {
+  padding: 24px var(--side);
+  margin-top: auto;
+  border-top: 1px solid #E8E5DE;
+  flex-shrink: 0;
+}
+
+.mobileJoinBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  background: #0A0A0A;
+  color: #F0EDE6;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.mobileJoinBtn:hover { background: #2A2A2A; }
+.mobileJoinBtn svg { width: 14px; height: 14px; }

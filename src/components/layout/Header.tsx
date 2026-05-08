@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Menu, X, ChevronDown } from 'lucide-react';
+import { ShieldCheck, Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { GALAXIES, PILLAR_COLORS } from '../../data/galaxies';
 import s from './Header.module.css';
 
@@ -8,6 +8,19 @@ export default function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [tagsOpen, setTagsOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
+  const NAV_ITEMS = [
+    { label: 'Comprendre', to: '/articles' },
+    { label: 'Interviews', to: '/interviews' },
+    { label: 'Dossiers', to: '/dossiers' },
+    { label: 'Forum', to: '/forum' },
+    { label: 'Newsletter', to: '/newsletter' },
+  ];
 
   return (
     <header className={s.header}>
@@ -37,13 +50,7 @@ export default function Header() {
               <ChevronDown className={`${s.navChevron} ${megaOpen ? s.navChevronOpen : ''}`} />
             </button>
           </div>
-          {[
-            { label: 'Comprendre', to: '/articles' },
-            { label: 'Interviews', to: '/interviews' },
-            { label: 'Dossiers', to: '/dossiers' },
-            { label: 'Forum', to: '/forum' },
-            { label: 'Newsletter', to: '/newsletter' },
-          ].map(item => (
+          {NAV_ITEMS.map(item => (
             <Link key={item.label} to={item.to} className={s.navLink}>
               {item.label}
             </Link>
@@ -129,6 +136,46 @@ export default function Header() {
               {tagsOpen ? 'Voir moins' : 'Voir plus'}
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div className={mobileMenuOpen ? s.mobileMenuOpen : s.mobileMenu}>
+        <div className={s.mobileMenuHeader}>
+          <Link to="/" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
+            <img src="/thinkerview-logo.png" alt="Thinkerview" className={s.logoImg} />
+          </Link>
+          <button className={s.mobileMenuClose} onClick={() => setMobileMenuOpen(false)} aria-label="Fermer">
+            <X />
+          </button>
+        </div>
+
+        <div className={s.mobileMenuBody}>
+          {NAV_ITEMS.map(item => (
+            <Link key={item.label} to={item.to} className={s.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
+              {item.label}
+              <ArrowRight />
+            </Link>
+          ))}
+
+          <div className={s.mobileGalaxies}>
+            <div className={s.mobileGalaxiesLabel}>Les 6 Galaxies</div>
+            <div className={s.mobileGalaxiesGrid}>
+              {GALAXIES.map(g => (
+                <Link key={g.key} to={`/galaxie/${g.key}`} className={s.mobileGalaxyLink} onClick={() => setMobileMenuOpen(false)}>
+                  <span className={s.mobileGalaxyDot} style={{ background: PILLAR_COLORS[g.key].accent }} />
+                  <span className={s.mobileGalaxyName}>{g.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={s.mobileMenuFooter}>
+          <Link to="/rejoindre" className={s.mobileJoinBtn} onClick={() => setMobileMenuOpen(false)}>
+            <ShieldCheck />
+            Rejoindre Thinkerview
+          </Link>
         </div>
       </div>
     </header>

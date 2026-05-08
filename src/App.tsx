@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
+const PitchPage = lazy(() => import('./pages/PitchPage'));
 const ArcanesPage = lazy(() => import('./pages/ArcanesPage'));
 const GalaxiesPage = lazy(() => import('./pages/GalaxiesPage'));
 const GalaxieDetailPage = lazy(() => import('./pages/GalaxieDetailPage'));
@@ -38,7 +39,8 @@ export default function App() {
       <ScrollToTop />
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/" element={<ArcanesPage />} />
+          <Route path="/" element={<PitchPage />} />
+          <Route path="/home" element={<ArcanesPage />} />
           <Route path="/galaxies" element={<GalaxiesPage />} />
           <Route path="/galaxie/:galaxieId" element={<GalaxieDetailPage />} />
           <Route path="/galaxie/:galaxieId/:univers" element={<UniversDetailPage />} />
@@ -56,7 +58,7 @@ export default function App() {
           <Route path="/a-propos" element={<AProposPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
-          <Route path="*" element={<ArcanesPage />} />
+          <Route path="*" element={<PitchPage />} />
         </Routes>
       </Suspense>
     </>

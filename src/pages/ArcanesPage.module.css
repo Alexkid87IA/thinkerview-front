@@ -683,59 +683,44 @@
 .quoteStrip {
   display: flex;
   align-items: center;
-  gap: 32px;
-  background: radial-gradient(ellipse at 30% 40%, #1a1a1a 0%, #0a0a0a 100%);
-  padding: 28px 36px;
+  gap: 16px;
   margin-bottom: 48px;
-  position: relative;
-  overflow: hidden;
+  padding: 16px 20px;
+  border-top: 1px solid #D5D0C8;
+  border-bottom: 1px solid #D5D0C8;
 }
 
-.quoteStrip::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 50%, rgba(240, 237, 230, 0.04) 0%, transparent 60%),
-    radial-gradient(circle at 85% 30%, rgba(240, 237, 230, 0.02) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.quoteLogo {
-  width: 72px;
-  height: 72px;
+.quoteAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-  border-radius: 50%;
-  border: 2px solid rgba(240, 237, 230, 0.15);
+  border: 1px solid #D5D0C8;
+  filter: grayscale(1);
+  opacity: 0.7;
 }
 
 .quoteText {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(16px, 2vw, 22px);
-  line-height: 1.4;
+  font-size: clamp(12px, 1.4vw, 15px);
+  line-height: 1.5;
   letter-spacing: -0.01em;
-  color: #F0EDE6;
+  color: #5A5850;
   margin: 0;
-  position: relative;
-  z-index: 1;
   flex: 1;
 }
 
 .quoteAuthor {
   font-family: var(--mono);
   font-style: normal;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.4);
-  position: relative;
-  z-index: 1;
+  color: #A8A49C;
   flex-shrink: 0;
   white-space: nowrap;
 }
@@ -2207,6 +2192,32 @@
   background:
     radial-gradient(circle at 40% 35%, #2A2A2A, #1A1A1A);
   flex-shrink: 0;
+}
+
+.spotlightAvatarImg {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  flex-shrink: 0;
+  border: 2px solid rgba(240, 237, 230, 0.15);
+}
+
+.spotlightVideoWrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  background: #000;
+}
+
+.spotlightIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .spotlightGuestName {
@@ -3861,9 +3872,9 @@
   .rule { margin: 20px 0; }
   .tagline { font-size: 18px; margin: 0 0 28px; }
 
-  .quoteStrip { flex-direction: column; gap: 20px; padding: 24px 20px; text-align: center; margin-bottom: 28px; }
-  .quoteLogo { width: 56px; height: 56px; }
-  .quoteAuthor { margin-top: 4px; }
+  .quoteStrip { gap: 12px; padding: 12px 16px; margin-bottom: 28px; }
+  .quoteAvatar { width: 32px; height: 32px; }
+  .quoteAuthor { font-size: 8px; }
 
   .pillars {
     overflow-x: auto;
@@ -3910,6 +3921,7 @@
   .spotlightExcerpt { font-size: 13px; }
   .spotlightGuest { padding: 14px 16px; }
   .spotlightAvatar { width: 40px; height: 40px; }
+  .spotlightAvatarImg { width: 40px; height: 40px; }
   .spotlightGuestName { font-size: 13px; }
   .spotlightGuestRole { font-size: 11px; }
 
