@@ -456,6 +456,11 @@ export default function ArcanesPage() {
 
 
   useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     document.body.style.background = '#F0EDE6';
     document.body.style.color = '#0A0A0A';
     return () => {
@@ -621,6 +626,52 @@ export default function ArcanesPage() {
                 {tagsOpen ? 'Voir moins' : 'Voir plus'}
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* ── Mobile menu ── */}
+        <div className={mobileMenuOpen ? s.mobileMenuOpen : s.mobileMenu}>
+          <div className={s.mobileMenuHeader}>
+            <Link to="/" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
+              <img src="/thinkerview-logo.png" alt="Thinkerview" className={s.logoImg} />
+            </Link>
+            <button className={s.mobileMenuClose} onClick={() => setMobileMenuOpen(false)} aria-label="Fermer">
+              <X />
+            </button>
+          </div>
+
+          <div className={s.mobileMenuBody}>
+            {[
+              { label: 'Comprendre', href: '/articles' },
+              { label: 'Interviews', href: '/interviews' },
+              { label: 'Dossiers', href: '/dossiers' },
+              { label: 'Forum', href: '/forum' },
+              { label: 'Newsletter', href: '/newsletter' },
+            ].map(item => (
+              <Link key={item.label} to={item.href} className={s.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
+                {item.label}
+                <ArrowRight />
+              </Link>
+            ))}
+
+            <div className={s.mobileGalaxies}>
+              <div className={s.mobileGalaxiesLabel}>Les 6 Galaxies</div>
+              <div className={s.mobileGalaxiesGrid}>
+                {GALAXIES.map(g => (
+                  <Link key={g.key} to={`/galaxie/${g.key}`} className={s.mobileGalaxyLink} onClick={() => setMobileMenuOpen(false)}>
+                    <span className={s.mobileGalaxyDot} style={{ background: PILLAR_COLORS[g.key].accent }} />
+                    <span className={s.mobileGalaxyName}>{g.label}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className={s.mobileMenuFooter}>
+            <Link to="/rejoindre" className={s.mobileJoinBtn} onClick={() => setMobileMenuOpen(false)}>
+              <ShieldCheck />
+              Rejoindre Thinkerview
+            </Link>
           </div>
         </div>
       </header>
