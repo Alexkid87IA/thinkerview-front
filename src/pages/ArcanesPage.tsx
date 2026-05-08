@@ -866,7 +866,7 @@ export default function ArcanesPage() {
             {/* Dossier vedette */}
             <a href={`/dossiers/${DOSSIERS[0].slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(DOSSIERS[0].category)].accent } as React.CSSProperties}>
               <div className={s.dossierTab}>
-                <span className={s.dossierTabLabel}>{DOSSIERS[0].category}</span>
+                <span className={s.dossierTabLabel}>Dossier</span>
               </div>
               <div className={s.dossierBody}>
                 <img src="https://picsum.photos/seed/dossier-tech/800/500" alt="" className={s.dossierBg} />
