@@ -411,12 +411,12 @@
 }
 
 @media (max-width: 880px) {
-  .logoImg { width: 52px; height: 52px; }
+  .logoImg { width: 56px; height: 56px; }
 }
 
 @media (max-width: 480px) {
   .header .inner { padding-top: 10px; padding-bottom: 10px; }
-  .logoImg { width: 44px; height: 44px; padding: 4px; border-radius: 10px; }
+  .logoImg { width: 56px; height: 56px; padding: 5px; border-radius: 12px; }
 }
 
 /* ── Mobile menu ── */
