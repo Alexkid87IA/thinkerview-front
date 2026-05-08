@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Vote, MessageSquare, Radar, ShieldCheck, Menu, X, Play, Newspaper, FolderOpen, ArrowRight, Lock, Bell, Users, ChevronDown } from 'lucide-react';
 import s from './ArcanesPage.module.css';
@@ -220,25 +221,6 @@ const PILLAR_COLORS: Record<string, { accent: string; bg: string; border: string
 
 interface CompArticle { slug: string; title: string; readTime: string; author: string }
 
-const COMP_COVERS = [
-  'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/97050/pexels-photo-97050.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/2156/sky-earth-space-working.jpg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=600',
-];
-function compCover(slug: string) {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) | 0;
-  return COMP_COVERS[Math.abs(h) % COMP_COVERS.length];
-}
 
 const COMPRENDRE_ARTICLES: Record<string, Record<string, CompArticle[]>> = {
   geopolitique: {
@@ -541,14 +523,14 @@ export default function ArcanesPage() {
             </div>
             {[
               { label: 'Comprendre', href: '/articles' },
-              { label: 'Actualité', href: '/actu' },
+              { label: 'Interviews', href: '/interviews' },
               { label: 'Dossiers', href: '/dossiers' },
-              { label: 'Forum', href: '#forum' },
+              { label: 'Forum', href: '/forum' },
               { label: 'Newsletter', href: '/newsletter' },
             ].map(item => (
-              <a key={item.label} href={item.href} className={s.navLink}>
+              <Link key={item.label} to={item.href} className={s.navLink}>
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -659,6 +641,15 @@ export default function ArcanesPage() {
         <motion.p className={s.tagline} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.8 }}>
           Zéro bot, zéro manipulation, zéro censure — une communauté de citoyens qui pensent par eux-mêmes.
         </motion.p>
+
+        {/* ── Citation Einstein ── */}
+        <motion.div className={s.quoteStrip} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}>
+          <img src="/einstein.jpg" alt="Albert Einstein" className={s.quoteLogo} />
+          <blockquote className={s.quoteText}>
+            «&nbsp;Il ne faut pas compter sur ceux qui créent les problèmes pour les résoudre.&nbsp;»
+          </blockquote>
+          <cite className={s.quoteAuthor}>Albert Einstein</cite>
+        </motion.div>
 
         {/* ── Pillars ── */}
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1 }}>
@@ -946,13 +937,146 @@ export default function ArcanesPage() {
         </a>
       </section>
 
+      {/* ══════════ COMPRENDRE ══════════ */}
+      <section className={s.compSection}>
+        <div className={s.compInner}>
+          {/* ── Header ── */}
+          <div className={s.sectionHeader}>
+            <div className={s.chapterMark}>
+              <span className={s.chNum}>Ch.03</span>
+              <span className={s.chSep}>/</span>
+              <span className={s.chLabel}>Comprendre</span>
+            </div>
+            <h2 className={s.sectionTitle}>{`Nos analyses, au-delà`} <em>du flux</em>.</h2>
+            <p className={s.sectionDesc}>{`Articles, décryptages, enquêtes — le fond éditorial produit par la rédaction.`}</p>
+            <a href="/articles" className={s.sectionLink}>Tous les articles <ArrowRight /></a>
+          </div>
+
+          {/* ── Galaxy tabs ── */}
+          <nav className={s.compTabs}>
+            {GALAXIES.map((g, i) => (
+              <button
+                key={g.key}
+                className={`${s.compTab} ${activeCompPillar === i ? s.compTabActive : ''}`}
+                onClick={() => { setActiveCompPillar(i); setActiveCompUnivers(0); }}
+                style={{ '--pillar-accent': PILLAR_COLORS[g.key].accent } as React.CSSProperties}
+              >
+                <span className={s.compTabDot} style={{ background: PILLAR_COLORS[g.key].accent }} />
+                {g.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* ── Active galaxy content ── */}
+          <div className={s.compPanel} key={`${activeCompPillar}-${activeCompUnivers}`}>
+            {(() => {
+              const galaxy = GALAXIES[activeCompPillar];
+              const colors = PILLAR_COLORS[galaxy.key];
+              const universKey = galaxy.univers[activeCompUnivers]?.slug;
+              const galaxyArticles = COMPRENDRE_ARTICLES[galaxy.key] || {};
+              const articles = galaxyArticles[universKey] || [];
+              const allGalaxyArticles = Object.values(galaxyArticles).flat();
+              const featured = articles[0];
+              const listArticles = articles.slice(1);
+              const otherArticles = Object.entries(galaxyArticles)
+                .filter(([k]) => k !== universKey)
+                .flatMap(([, v]) => v)
+                .slice(0, Math.max(0, 5 - listArticles.length));
+              const sideList = [...listArticles, ...otherArticles].slice(0, 5);
+              return (
+                <>
+                  {/* ── Univers sub-tabs ── */}
+                  <nav className={s.compUniversNav}>
+                    {galaxy.univers.map((u, i) => (
+                      <button
+                        key={u.slug}
+                        className={`${s.compUniversBtn} ${activeCompUnivers === i ? s.compUniversBtnActive : ''}`}
+                        onClick={() => setActiveCompUnivers(i)}
+                        style={{ '--pillar-accent': colors.accent } as React.CSSProperties}
+                      >
+                        {u.label}
+                      </button>
+                    ))}
+                  </nav>
+
+                  {/* ── Featured + side list ── */}
+                  {featured && (
+                    <div className={s.compSplit}>
+                      {/* Featured article (left) */}
+                      <a href={`/article/${featured.slug}`} className={s.compFeatured} style={{ '--pillar-accent': colors.accent } as React.CSSProperties}>
+                        <div className={s.compFeaturedCover}>
+                          <img
+                            src={`https://picsum.photos/seed/${featured.slug}/800/450`}
+                            alt=""
+                            className={s.compFeaturedCoverImg}
+                            loading="lazy"
+                          />
+                          <div className={s.compFeaturedCoverAccent} style={{ background: colors.accent }} />
+                        </div>
+                        <div className={s.compFeaturedInner}>
+                          <span className={s.compCardBadge} style={{ color: colors.accent, borderColor: colors.border }}>
+                            {galaxy.univers[activeCompUnivers]?.label}
+                          </span>
+                          <h4 className={s.compFeaturedTitle}>{featured.title}</h4>
+                          <p className={s.compFeaturedDeck}>
+                            Analyse approfondie par {featured.author} — {featured.readTime} de lecture.
+                          </p>
+                          <div className={s.compFeaturedFoot}>
+                            <span className={s.compCardAuthor}>{featured.author}</span>
+                            <span className={s.compFeaturedRead}>Lire <ArrowRight size={12} /></span>
+                          </div>
+                        </div>
+                      </a>
+
+                      {/* Side list (right) */}
+                      <div className={s.compList}>
+                        {sideList.map((a, i) => (
+                          <a key={a.slug} href={`/article/${a.slug}`} className={s.compListItem} style={{ '--pillar-accent': colors.accent } as React.CSSProperties}>
+                            <span className={s.compListNum}>{String(i + 2).padStart(2, '0')}</span>
+                            <div className={s.compListBody}>
+                              <h4 className={s.compListTitle}>{a.title}</h4>
+                              <div className={s.compListMeta}>
+                                <span>{a.author}</span>
+                                <span className={s.compListSep} />
+                                <span>{a.readTime}</span>
+                              </div>
+                            </div>
+                            <div className={s.compListThumb}>
+                              <img
+                                src={`https://picsum.photos/seed/${a.slug}/160/104`}
+                                alt=""
+                                className={s.compListThumbImg}
+                                loading="lazy"
+                              />
+                              <div className={s.compListThumbBar} style={{ background: colors.accent }} />
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* CTA */}
+                  <div className={s.compFooter}>
+                    <a href={`/articles?galaxie=${galaxy.key}`} className={s.compAllLink} style={{ '--pillar-accent': colors.accent } as React.CSSProperties}>
+                      Tous les articles « {galaxy.label} » <ArrowRight />
+                    </a>
+                    <span className={s.compCount}>+ de {allGalaxyArticles.length} articles dans cette galaxie</span>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      </section>
+
       {/* ══════════ FORUM CITOYEN ══════════ */}
       <section className={s.forumSection}>
         <div className={s.forumInner}>
           {/* ── Header ── */}
           <div className={s.sectionHeader}>
             <div className={s.chapterMark}>
-              <span className={s.chNum}>Ch.03</span>
+              <span className={s.chNum}>Ch.04</span>
               <span className={s.chSep}>/</span>
               <span className={s.chLabel}>Forum citoyen</span>
             </div>
@@ -1009,99 +1133,6 @@ export default function ArcanesPage() {
         </div>
       </section>
 
-      {/* ══════════ COMPRENDRE ══════════ */}
-      <section className={s.compSection}>
-        <div className={s.compInner}>
-          {/* ── Header ── */}
-          <div className={s.sectionHeader}>
-            <div className={s.chapterMark}>
-              <span className={s.chNum}>Ch.04</span>
-              <span className={s.chSep}>/</span>
-              <span className={s.chLabel}>Comprendre</span>
-            </div>
-            <h2 className={s.sectionTitle}>{`Nos analyses, au-delà`} <em>du flux</em>.</h2>
-            <p className={s.sectionDesc}>{`Articles, décryptages, enquêtes — le fond éditorial produit par la rédaction.`}</p>
-            <a href="/articles" className={s.sectionLink}>Tous les articles <ArrowRight /></a>
-          </div>
-
-          {/* ── Galaxy tabs ── */}
-          <nav className={s.compTabs}>
-            {GALAXIES.map((g, i) => (
-              <button
-                key={g.key}
-                className={`${s.compTab} ${activeCompPillar === i ? s.compTabActive : ''}`}
-                onClick={() => { setActiveCompPillar(i); setActiveCompUnivers(0); }}
-                style={{ '--pillar-accent': PILLAR_COLORS[g.key].accent } as React.CSSProperties}
-              >
-                <span className={s.compTabDot} style={{ background: PILLAR_COLORS[g.key].accent }} />
-                {g.label}
-              </button>
-            ))}
-          </nav>
-
-          {/* ── Active galaxy content ── */}
-          <div className={s.compPanel} key={`${activeCompPillar}-${activeCompUnivers}`}>
-            {(() => {
-              const galaxy = GALAXIES[activeCompPillar];
-              const colors = PILLAR_COLORS[galaxy.key];
-              const universKey = galaxy.univers[activeCompUnivers]?.slug;
-              const galaxyArticles = COMPRENDRE_ARTICLES[galaxy.key] || {};
-              const articles = galaxyArticles[universKey] || [];
-              return (
-                <>
-                  {/* ── Univers sub-tabs ── */}
-                  <nav className={s.compUniversNav}>
-                    {galaxy.univers.map((u, i) => (
-                      <button
-                        key={u.slug}
-                        className={`${s.compUniversBtn} ${activeCompUnivers === i ? s.compUniversBtnActive : ''}`}
-                        onClick={() => setActiveCompUnivers(i)}
-                        style={{ '--pillar-accent': colors.accent } as React.CSSProperties}
-                      >
-                        {u.label}
-                      </button>
-                    ))}
-                  </nav>
-
-                  {/* ── 3 article cards ── */}
-                  <div className={s.compGrid}>
-                    {articles.map((a, i) => (
-                      <a key={a.slug} href={`/article/${a.slug}`} className={s.compCard} style={{ '--pillar-accent': colors.accent } as React.CSSProperties}>
-                        <div className={s.compCardAccent} style={{ background: colors.accent }} />
-                        <div className={s.compCardCover}>
-                          <img src={compCover(a.slug)} alt="" className={s.compCardCoverImg} />
-                        </div>
-                        <div className={s.compCardInner}>
-                          <div className={s.compCardHead}>
-                            <span className={s.compCardNum}>{String(i + 1).padStart(2, '0')}</span>
-                            <span className={s.compCardBadge} style={{ color: colors.accent, borderColor: colors.border }}>
-                              {galaxy.univers[activeCompUnivers]?.label}
-                            </span>
-                          </div>
-                          <h4 className={s.compCardTitle}>{a.title}</h4>
-                          <div className={s.compCardFoot}>
-                            <span className={s.compCardAuthor}>{a.author}</span>
-                            <span className={s.compCardTime}>{a.readTime}</span>
-                          </div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
-                  <div className={s.compFooter}>
-                    <a href={`/articles?galaxie=${galaxy.key}&univers=${universKey}`} className={s.compAllLink} style={{ '--pillar-accent': colors.accent } as React.CSSProperties}>
-                      Tous les articles « {galaxy.univers[activeCompUnivers]?.label} » <ArrowRight />
-                    </a>
-                    <span className={s.compCount}>+ de 40 articles dans cette galaxie</span>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      </section>
-
       {/* ══════════ MISSION ══════════ */}
       <section className={s.missionSection}>
         <div className={s.missionNoise} aria-hidden="true" />
@@ -1151,20 +1182,39 @@ export default function ArcanesPage() {
         </div>
       </section>
 
-      {/* ══════════ TICKER ══════════ */}
-      <div className={s.ticker}>
-        <div className={s.tickerRow}>
-          <span className={s.tickerDot} />
-          <span className={s.tickerLbl}>Signal</span>
-          <div className={s.tickerOverflow}>
-            <div className={s.tickerTrack}>
-              {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-                <span key={i} className={s.tickerItem}>{item}</span>
-              ))}
+      {/* ══════════ SIGNAL BAND ══════════ */}
+      <section className={s.signalBand}>
+        <div className={s.signalNoise} aria-hidden="true" />
+        <div className={s.signalHeader}>
+          <div className={s.signalHeaderInner}>
+            <div className={s.signalBadge}>
+              <span className={s.signalDot} />
+              <span className={s.signalLabel}>Signal</span>
             </div>
+            <span className={s.signalSub}>Fil de veille — alertes en temps réel</span>
           </div>
         </div>
-      </div>
+        <div className={s.signalScroll}>
+          <div className={s.signalTrack}>
+            {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+              <span key={i} className={s.signalItem}>
+                <span className={s.signalItemDash} aria-hidden="true" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className={s.signalScroll} style={{ animationDirection: 'reverse' } as React.CSSProperties}>
+          <div className={s.signalTrack} style={{ animationDirection: 'reverse' }}>
+            {[...TICKER_ITEMS, ...TICKER_ITEMS].reverse().map((item, i) => (
+              <span key={i} className={s.signalItem}>
+                <span className={s.signalItemDash} aria-hidden="true" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ══════════ ABOUT BAND ══════════ */}
       <section className={s.aboutBand}>
