@@ -1597,15 +1597,43 @@
 /* ── Dossier vedette — bloc sombre inversé ── */
 
 .dossierBlock {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   flex: 1;
   text-decoration: none;
   color: #F0EDE6;
+}
+
+/* Onglet du dossier */
+.dossierTab {
+  align-self: flex-start;
+  background: var(--dossier-accent, #4A7A8B);
+  padding: 6px 16px 5px;
+  border-radius: 4px 4px 0 0;
+  margin-left: 18px;
+}
+
+.dossierTabLabel {
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Corps du dossier */
+.dossierBody {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
-  min-height: 280px;
+  border: 1px solid rgba(240, 237, 230, 0.12);
+  border-top: 2px solid var(--dossier-accent, #4A7A8B);
+  min-height: 240px;
+  background: #0A0A0A;
 }
 
 .dossierBg {
@@ -1614,13 +1642,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.35;
+  opacity: 0.55;
   transition: transform 0.8s cubic-bezier(0.25, 0, 0.15, 1), opacity 0.5s;
 }
 
 .dossierBlock:hover .dossierBg {
-  transform: scale(1.06);
-  opacity: 0.45;
+  transform: scale(1.05);
+  opacity: 0.65;
 }
 
 .dossierOverlay {
@@ -1629,29 +1657,12 @@
   background:
     linear-gradient(
       to top,
-      rgba(10, 10, 10, 0.95) 0%,
-      rgba(10, 10, 10, 0.6) 40%,
-      rgba(10, 10, 10, 0.2) 100%
+      rgba(10, 10, 10, 0.88) 0%,
+      rgba(10, 10, 10, 0.4) 50%,
+      rgba(10, 10, 10, 0.05) 100%
     );
   z-index: 1;
   pointer-events: none;
-}
-
-.dossierAccent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--dossier-accent, #4A7A8B);
-  z-index: 2;
-  opacity: 0.7;
-  transition: opacity 0.3s, width 0.3s;
-}
-
-.dossierBlock:hover .dossierAccent {
-  opacity: 1;
-  width: 4px;
 }
 
 .dossierInner {
@@ -1664,7 +1675,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .dossierLabel {
@@ -1682,18 +1693,7 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.3);
-}
-
-.dossierCat {
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.5);
-  margin-bottom: 10px;
-  display: block;
+  color: rgba(240, 237, 230, 0.35);
 }
 
 .dossierTitle {
@@ -1712,7 +1712,7 @@
 }
 
 .dossierFoot {
-  margin-top: 20px;
+  margin-top: 18px;
   padding-top: 14px;
   border-top: 1px solid rgba(240, 237, 230, 0.1);
   display: flex;

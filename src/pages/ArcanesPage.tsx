@@ -865,18 +865,21 @@ export default function ArcanesPage() {
 
             {/* Dossier vedette */}
             <a href={`/dossiers/${DOSSIERS[0].slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(DOSSIERS[0].category)].accent } as React.CSSProperties}>
-              <img src="https://picsum.photos/seed/dossier-tech/800/500" alt="" className={s.dossierBg} />
-              <div className={s.dossierOverlay} />
-              <div className={s.dossierAccent} />
-              <div className={s.dossierInner}>
-                <div className={s.dossierTop}>
-                  <span className={s.dossierLabel}>Dossier</span>
-                  <span className={s.dossierNum}>#{String(DOSSIERS[0].articleCount).padStart(2, '0')} articles</span>
-                </div>
-                <span className={s.dossierCat}>{DOSSIERS[0].category}</span>
-                <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
-                <div className={s.dossierFoot}>
-                  <span className={s.dossierCta}>Lire le dossier <ArrowRight /></span>
+              <div className={s.dossierTab}>
+                <span className={s.dossierTabLabel}>{DOSSIERS[0].category}</span>
+              </div>
+              <div className={s.dossierBody}>
+                <img src="https://picsum.photos/seed/dossier-tech/800/500" alt="" className={s.dossierBg} />
+                <div className={s.dossierOverlay} />
+                <div className={s.dossierInner}>
+                  <div className={s.dossierTop}>
+                    <span className={s.dossierLabel}>Dossier</span>
+                    <span className={s.dossierNum}>{DOSSIERS[0].articleCount} articles</span>
+                  </div>
+                  <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
+                  <div className={s.dossierFoot}>
+                    <span className={s.dossierCta}>Ouvrir le dossier <ArrowRight /></span>
+                  </div>
                 </div>
               </div>
             </a>
