@@ -1596,33 +1596,42 @@
 
 /* ── Dossier vedette — bloc sombre inversé ── */
 
+/* Rangée de dossiers */
+.dossiersRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
 .dossierBlock {
   display: flex;
   flex-direction: column;
-  flex: 1;
   text-decoration: none;
   color: #F0EDE6;
+  transition: transform 0.25s;
 }
 
-/* Onglet du dossier */
+.dossierBlock:hover {
+  transform: translateY(-2px);
+}
+
 .dossierTab {
   align-self: flex-start;
   background: var(--dossier-accent, #4A7A8B);
-  padding: 3px 10px 2px;
-  border-radius: 3px 3px 0 0;
-  margin-left: 18px;
+  padding: 2px 8px 1px;
+  border-radius: 2px 2px 0 0;
+  margin-left: 8px;
 }
 
 .dossierTabLabel {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #fff;
 }
 
-/* Corps du dossier */
 .dossierBody {
   position: relative;
   flex: 1;
@@ -1630,9 +1639,8 @@
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  border: 1px solid rgba(240, 237, 230, 0.12);
   border-top: 2px solid var(--dossier-accent, #4A7A8B);
-  min-height: 240px;
+  min-height: 120px;
   background: #0A0A0A;
 }
 
@@ -1642,12 +1650,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.55;
-  transition: transform 0.8s cubic-bezier(0.25, 0, 0.15, 1), opacity 0.5s;
+  opacity: 0.5;
+  transition: transform 0.6s cubic-bezier(0.25, 0, 0.15, 1), opacity 0.4s;
 }
 
 .dossierBlock:hover .dossierBg {
-  transform: scale(1.05);
+  transform: scale(1.06);
   opacity: 0.65;
 }
 
@@ -1657,8 +1665,8 @@
   background:
     linear-gradient(
       to top,
-      rgba(10, 10, 10, 0.88) 0%,
-      rgba(10, 10, 10, 0.4) 50%,
+      rgba(10, 10, 10, 0.9) 0%,
+      rgba(10, 10, 10, 0.35) 60%,
       rgba(10, 10, 10, 0.05) 100%
     );
   z-index: 1;
@@ -1668,42 +1676,17 @@
 .dossierInner {
   position: relative;
   z-index: 2;
-  padding: 24px 22px;
-}
-
-.dossierTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.dossierLabel {
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--dossier-accent, #4A7A8B);
-}
-
-.dossierNum {
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.35);
+  padding: 10px 10px;
 }
 
 .dossierTitle {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: #F0EDE6;
-  margin: 0;
+  margin: 0 0 4px;
   transition: color 0.25s;
 }
 
@@ -1711,34 +1694,13 @@
   color: #fff;
 }
 
-.dossierFoot {
-  margin-top: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.dossierCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.dossierNum {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.3);
-  transition: color 0.25s, gap 0.25s;
-}
-
-.dossierBlock:hover .dossierCta {
-  color: #F0EDE6;
-  gap: 10px;
-}
-
-.dossierCta svg {
-  width: 10px;
-  height: 10px;
+  color: rgba(240, 237, 230, 0.35);
 }
 
 .colFootLink {
@@ -3858,8 +3820,7 @@
   .articleItemThumb { width: 76px; height: 56px; }
   .videoItem { padding: 10px 14px; }
   .videoItemThumb { width: 88px; height: 52px; }
-  .dossierBlock { padding: 22px 18px; }
-  .dossierTitle { font-size: 18px; }
+  .dossiersRow { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 }
 
 @media (max-width: 1080px) {
@@ -3959,8 +3920,9 @@
   .articleItemThumb { width: 72px; height: 54px; }
   .videoItem { padding: 10px 16px; }
   .videoItemThumb { width: 80px; height: 48px; }
-  .dossierBlock { padding: 20px 16px; }
-  .dossierTitle { font-size: 17px; }
+  .dossiersRow { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .dossierBody { min-height: 100px; }
+  .dossierTitle { font-size: 11px; }
   .miniBoxes { grid-template-columns: 1fr; }
   .miniBox { padding: 14px 16px; }
 

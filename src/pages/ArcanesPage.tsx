@@ -197,9 +197,12 @@ const LAST_INTERVIEW = {
 };
 
 const DOSSIERS = [
-  { slug: 'guerre-numerique', title: 'La guerre numérique : qui contrôle nos données ?', articleCount: 7, category: 'Technologie' },
-  { slug: 'energie-souveraine', title: `Énergie souveraine : le pari nucléaire français`, articleCount: 5, category: 'Énergie' },
-  { slug: 'influence-etrangere', title: `Ingérences étrangères : cartographie des opérations d'influence`, articleCount: 9, category: 'Géopolitique' },
+  { slug: 'guerre-numerique', title: 'La guerre numérique', articleCount: 7, category: 'Technologie', img: 'https://picsum.photos/seed/dossier-tech/400/300' },
+  { slug: 'energie-souveraine', title: 'Le pari nucléaire', articleCount: 5, category: 'Énergie', img: 'https://picsum.photos/seed/dossier-nrj/400/300' },
+  { slug: 'influence-etrangere', title: 'Ingérences étrangères', articleCount: 9, category: 'Géopolitique', img: 'https://picsum.photos/seed/dossier-geo/400/300' },
+  { slug: 'sante-donnees', title: 'Données de santé', articleCount: 4, category: 'Souveraineté', img: 'https://picsum.photos/seed/dossier-sante/400/300' },
+  { slug: 'dette-francaise', title: 'La dette française', articleCount: 6, category: 'Économie', img: 'https://picsum.photos/seed/dossier-dette/400/300' },
+  { slug: 'media-censure', title: 'Médias & censure', articleCount: 8, category: 'Politique', img: 'https://picsum.photos/seed/dossier-media/400/300' },
 ];
 
 function catKey(label: string): string {
@@ -863,26 +866,24 @@ export default function ArcanesPage() {
               ))}
             </div>
 
-            {/* Dossier vedette */}
-            <a href={`/dossiers/${DOSSIERS[0].slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(DOSSIERS[0].category)].accent } as React.CSSProperties}>
-              <div className={s.dossierTab}>
-                <span className={s.dossierTabLabel}>Dossier</span>
-              </div>
-              <div className={s.dossierBody}>
-                <img src="https://picsum.photos/seed/dossier-tech/800/500" alt="" className={s.dossierBg} />
-                <div className={s.dossierOverlay} />
-                <div className={s.dossierInner}>
-                  <div className={s.dossierTop}>
-                    <span className={s.dossierLabel}>Dossier</span>
-                    <span className={s.dossierNum}>{DOSSIERS[0].articleCount} articles</span>
+            {/* Dossiers */}
+            <div className={s.dossiersRow}>
+              {DOSSIERS.map((d, i) => (
+                <a key={d.slug} href={`/dossier/${d.slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(d.category)].accent } as React.CSSProperties}>
+                  <div className={s.dossierTab}>
+                    <span className={s.dossierTabLabel}>N°{String(i + 1).padStart(2, '0')}</span>
                   </div>
-                  <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
-                  <div className={s.dossierFoot}>
-                    <span className={s.dossierCta}>Ouvrir le dossier <ArrowRight /></span>
+                  <div className={s.dossierBody}>
+                    <img src={d.img} alt="" className={s.dossierBg} />
+                    <div className={s.dossierOverlay} />
+                    <div className={s.dossierInner}>
+                      <h3 className={s.dossierTitle}>{d.title}</h3>
+                      <span className={s.dossierNum}>{d.articleCount} art.</span>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </a>
+                </a>
+              ))}
+            </div>
 
             {/* 2 mini boxes */}
             <div className={s.miniBoxes}>
