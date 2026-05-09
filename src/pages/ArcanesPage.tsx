@@ -866,40 +866,35 @@ export default function ArcanesPage() {
               ))}
             </div>
 
-            {/* Dossiers */}
-            <div className={s.dossiersRow}>
-              {DOSSIERS.map((d, i) => (
-                <a key={d.slug} href={`/dossier/${d.slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(d.category)].accent } as React.CSSProperties}>
-                  <div className={s.dossierTab}>
-                    <span className={s.dossierTabLabel}>N°{String(i + 1).padStart(2, '0')}</span>
-                  </div>
-                  <div className={s.dossierBody}>
-                    <img src={d.img} alt="" className={s.dossierBg} />
-                    <div className={s.dossierOverlay} />
-                    <div className={s.dossierInner}>
-                      <h3 className={s.dossierTitle}>{d.title}</h3>
-                      <span className={s.dossierNum}>{d.articleCount} art.</span>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
+            {/* Dossier vedette */}
+            <a href={`/dossier/${DOSSIERS[0].slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(DOSSIERS[0].category)].accent } as React.CSSProperties}>
+              <div className={s.dossierTab}>
+                <span className={s.dossierTabLabel}>Dossier</span>
+              </div>
+              <div className={s.dossierBody}>
+                <img src={DOSSIERS[0].img} alt="" className={s.dossierBg} />
+                <div className={s.dossierOverlay} />
+                <div className={s.dossierInner}>
+                  <span className={s.dossierCat}>{DOSSIERS[0].category}</span>
+                  <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
+                  <span className={s.dossierNum}>{DOSSIERS[0].articleCount} articles</span>
+                </div>
+              </div>
+            </a>
 
-            {/* 2 mini boxes */}
+            {/* Newsletter + Communauté */}
             <div className={s.miniBoxes}>
               <a href="/newsletter" className={s.miniBox}>
-                <Bell className={s.miniBoxIcon} />
-                <div className={s.miniBoxBody}>
-                  <span className={s.miniBoxTitle}>Newsletter</span>
-                  <span className={s.miniBoxDesc}>Chaque dimanche, l'essentiel.</span>
-                </div>
+                <div className={s.miniBoxAccent} />
+                <span className={s.miniBoxLabel}>Newsletter</span>
+                <span className={s.miniBoxDesc}>Chaque dimanche, l'essentiel décrypté.</span>
+                <span className={s.miniBoxCta}>S'inscrire <ArrowRight /></span>
               </a>
-              <a href="/ensemble" className={s.miniBox}>
-                <Users className={s.miniBoxIcon} />
-                <div className={s.miniBoxBody}>
-                  <span className={s.miniBoxTitle}>Communauté</span>
-                  <span className={s.miniBoxDesc}>43 271 membres vérifiés</span>
-                </div>
+              <a href="/rejoindre" className={s.miniBox}>
+                <div className={s.miniBoxAccent} />
+                <span className={s.miniBoxLabel}>Communauté</span>
+                <span className={s.miniBoxDesc}>43 271 membres vérifiés.</span>
+                <span className={s.miniBoxCta}>Rejoindre <ArrowRight /></span>
               </a>
             </div>
           </div>
