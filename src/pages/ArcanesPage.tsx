@@ -197,12 +197,11 @@ const LAST_INTERVIEW = {
 };
 
 const DOSSIERS = [
-  { slug: 'guerre-numerique', title: 'La guerre numérique', articleCount: 7, category: 'Technologie', img: 'https://picsum.photos/seed/dossier-tech/400/300' },
-  { slug: 'energie-souveraine', title: 'Le pari nucléaire', articleCount: 5, category: 'Énergie', img: 'https://picsum.photos/seed/dossier-nrj/400/300' },
-  { slug: 'influence-etrangere', title: 'Ingérences étrangères', articleCount: 9, category: 'Géopolitique', img: 'https://picsum.photos/seed/dossier-geo/400/300' },
-  { slug: 'sante-donnees', title: 'Données de santé', articleCount: 4, category: 'Souveraineté', img: 'https://picsum.photos/seed/dossier-sante/400/300' },
-  { slug: 'dette-francaise', title: 'La dette française', articleCount: 6, category: 'Économie', img: 'https://picsum.photos/seed/dossier-dette/400/300' },
-  { slug: 'media-censure', title: 'Médias & censure', articleCount: 8, category: 'Politique', img: 'https://picsum.photos/seed/dossier-media/400/300' },
+  { slug: 'guerre-numerique', title: 'La guerre numérique : qui contrôle nos données ?', articleCount: 7, category: 'Technologie', img: 'https://picsum.photos/seed/dossier-tech/600/400' },
+  { slug: 'energie-souveraine', title: 'Énergie souveraine : le pari nucléaire français', articleCount: 5, category: 'Énergie', img: 'https://picsum.photos/seed/dossier-nrj/600/400' },
+  { slug: 'influence-etrangere', title: 'Ingérences : cartographie des opérations d\'influence', articleCount: 9, category: 'Géopolitique', img: 'https://picsum.photos/seed/dossier-geo/600/400' },
+  { slug: 'dette-francaise', title: '3 500 milliards : anatomie de la dette française', articleCount: 6, category: 'Économie', img: 'https://picsum.photos/seed/dossier-dette/600/400' },
+  { slug: 'media-censure', title: 'Médias sous contrôle : enquête sur la censure en France', articleCount: 8, category: 'Politique', img: 'https://picsum.photos/seed/dossier-media/600/400' },
 ];
 
 function catKey(label: string): string {
@@ -453,6 +452,15 @@ export default function ArcanesPage() {
   const [tagsOpen, setTagsOpen] = useState(false);
   const [footerTab, setFooterTab] = useState<'galaxies' | 'formats' | 'apropos'>('galaxies');
   const [videoPlaying, setVideoPlaying] = useState(false);
+  const [activeDossier, setActiveDossier] = useState(0);
+  const dossierTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    dossierTimer.current = setInterval(() => {
+      setActiveDossier(prev => (prev + 1) % DOSSIERS.length);
+    }, 5000);
+    return () => { if (dossierTimer.current) clearInterval(dossierTimer.current); };
+  }, []);
   const pillarRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
@@ -866,27 +874,35 @@ export default function ArcanesPage() {
               ))}
             </div>
 
-            {/* Dossier vedette */}
-            <a href={`/dossier/${DOSSIERS[0].slug}`} className={s.dossierBlock}>
-              <div className={s.dossierLeft}>
-                <img src={DOSSIERS[0].img} alt="" className={s.dossierImg} />
+            {/* Classeur dossiers */}
+            <div className={s.classeur}>
+              <div className={s.classeurTabs}>
+                {DOSSIERS.map((d, i) => (
+                  <button
+                    key={d.slug}
+                    type="button"
+                    className={`${s.classeurTab} ${i === activeDossier ? s.classeurTabActive : ''}`}
+                    onClick={() => {
+                      setActiveDossier(i);
+                      if (dossierTimer.current) clearInterval(dossierTimer.current);
+                      dossierTimer.current = setInterval(() => {
+                        setActiveDossier(prev => (prev + 1) % DOSSIERS.length);
+                      }, 5000);
+                    }}
+                    style={{ '--tab-accent': PILLAR_COLORS[catKey(d.category)].accent } as React.CSSProperties}
+                  >
+                    N°{String(i + 1).padStart(2, '0')}
+                  </button>
+                ))}
               </div>
-              <div className={s.dossierRight}>
-                <span className={s.dossierLabel}>Dossier · {DOSSIERS[0].category}</span>
-                <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
-                <span className={s.dossierNum}>{DOSSIERS[0].articleCount} articles</span>
-              </div>
-            </a>
-
-            {/* Newsletter + Communauté */}
-            <div className={s.miniBoxes}>
-              <a href="/newsletter" className={s.miniBox}>
-                <span className={s.miniBoxLabel}>Newsletter</span>
-                <span className={s.miniBoxDesc}>Chaque dimanche, l'essentiel.</span>
-              </a>
-              <a href="/rejoindre" className={s.miniBox}>
-                <span className={s.miniBoxLabel}>Communauté</span>
-                <span className={s.miniBoxDesc}>43 271 membres vérifiés</span>
+              <a href={`/dossier/${DOSSIERS[activeDossier].slug}`} className={s.classeurBody}>
+                <img src={DOSSIERS[activeDossier].img} alt="" className={s.classeurImg} />
+                <div className={s.classeurOverlay} />
+                <div className={s.classeurContent}>
+                  <span className={s.classeurCat}>{DOSSIERS[activeDossier].category}</span>
+                  <h3 className={s.classeurTitle}>{DOSSIERS[activeDossier].title}</h3>
+                  <span className={s.classeurMeta}>{DOSSIERS[activeDossier].articleCount} articles · Ouvrir le dossier →</span>
+                </div>
               </a>
             </div>
           </div>
