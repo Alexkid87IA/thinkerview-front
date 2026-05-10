@@ -867,34 +867,26 @@ export default function ArcanesPage() {
             </div>
 
             {/* Dossier vedette */}
-            <a href={`/dossier/${DOSSIERS[0].slug}`} className={s.dossierBlock} style={{ '--dossier-accent': PILLAR_COLORS[catKey(DOSSIERS[0].category)].accent } as React.CSSProperties}>
-              <div className={s.dossierTab}>
-                <span className={s.dossierTabLabel}>Dossier</span>
+            <a href={`/dossier/${DOSSIERS[0].slug}`} className={s.dossierBlock}>
+              <div className={s.dossierLeft}>
+                <img src={DOSSIERS[0].img} alt="" className={s.dossierImg} />
               </div>
-              <div className={s.dossierBody}>
-                <img src={DOSSIERS[0].img} alt="" className={s.dossierBg} />
-                <div className={s.dossierOverlay} />
-                <div className={s.dossierInner}>
-                  <span className={s.dossierCat}>{DOSSIERS[0].category}</span>
-                  <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
-                  <span className={s.dossierNum}>{DOSSIERS[0].articleCount} articles</span>
-                </div>
+              <div className={s.dossierRight}>
+                <span className={s.dossierLabel}>Dossier · {DOSSIERS[0].category}</span>
+                <h3 className={s.dossierTitle}>{DOSSIERS[0].title}</h3>
+                <span className={s.dossierNum}>{DOSSIERS[0].articleCount} articles</span>
               </div>
             </a>
 
             {/* Newsletter + Communauté */}
             <div className={s.miniBoxes}>
               <a href="/newsletter" className={s.miniBox}>
-                <div className={s.miniBoxAccent} />
                 <span className={s.miniBoxLabel}>Newsletter</span>
-                <span className={s.miniBoxDesc}>Chaque dimanche, l'essentiel décrypté.</span>
-                <span className={s.miniBoxCta}>S'inscrire <ArrowRight /></span>
+                <span className={s.miniBoxDesc}>Chaque dimanche, l'essentiel.</span>
               </a>
               <a href="/rejoindre" className={s.miniBox}>
-                <div className={s.miniBoxAccent} />
                 <span className={s.miniBoxLabel}>Communauté</span>
-                <span className={s.miniBoxDesc}>43 271 membres vérifiés.</span>
-                <span className={s.miniBoxCta}>Rejoindre <ArrowRight /></span>
+                <span className={s.miniBoxDesc}>43 271 membres vérifiés</span>
               </a>
             </div>
           </div>
