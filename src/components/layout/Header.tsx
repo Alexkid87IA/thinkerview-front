@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { GALAXIES, PILLAR_COLORS } from '../../data/galaxies';
@@ -140,45 +141,48 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className={mobileMenuOpen ? s.mobileMenuOpen : s.mobileMenu}>
-        <div className={s.mobileMenuHeader}>
-          <Link to="/home" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
-            <img src="/phase-iii/logo-sur-blanc.svg" alt="PHASE III" className={s.logoImg} />
-          </Link>
-          <button className={s.mobileMenuClose} onClick={() => setMobileMenuOpen(false)} aria-label="Fermer">
-            <X />
-          </button>
-        </div>
-
-        <div className={s.mobileMenuBody}>
-          {NAV_ITEMS.map(item => (
-            <Link key={item.label} to={item.to} className={s.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-              {item.label}
-              <ArrowRight />
+      {/* Menu mobile rendu hors de l'en-tête : son flou d'arrière-plan enfermerait un élément fixe dans ses 55 px */}
+      {createPortal(
+        <div className={mobileMenuOpen ? s.mobileMenuOpen : s.mobileMenu}>
+          <div className={s.mobileMenuHeader}>
+            <Link to="/home" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
+              <img src="/phase-iii/logo-sur-blanc.svg" alt="PHASE III" className={s.logoImg} />
             </Link>
-          ))}
+            <button className={s.mobileMenuClose} onClick={() => setMobileMenuOpen(false)} aria-label="Fermer">
+              <X />
+            </button>
+          </div>
 
-          <div className={s.mobileGalaxies}>
-            <div className={s.mobileGalaxiesLabel}>Les 6 Galaxies</div>
-            <div className={s.mobileGalaxiesGrid}>
-              {GALAXIES.map(g => (
-                <Link key={g.key} to={`/galaxie/${g.key}`} className={s.mobileGalaxyLink} onClick={() => setMobileMenuOpen(false)}>
-                  <span className={s.mobileGalaxyDot} style={{ background: PILLAR_COLORS[g.key].accent }} />
-                  <span className={s.mobileGalaxyName}>{g.label}</span>
-                </Link>
-              ))}
+          <div className={s.mobileMenuBody}>
+            {NAV_ITEMS.map(item => (
+              <Link key={item.label} to={item.to} className={s.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
+                {item.label}
+                <ArrowRight />
+              </Link>
+            ))}
+
+            <div className={s.mobileGalaxies}>
+              <div className={s.mobileGalaxiesLabel}>Les 6 Galaxies</div>
+              <div className={s.mobileGalaxiesGrid}>
+                {GALAXIES.map(g => (
+                  <Link key={g.key} to={`/galaxie/${g.key}`} className={s.mobileGalaxyLink} onClick={() => setMobileMenuOpen(false)}>
+                    <span className={s.mobileGalaxyDot} style={{ background: PILLAR_COLORS[g.key].accent }} />
+                    <span className={s.mobileGalaxyName}>{g.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={s.mobileMenuFooter}>
-          <Link to="/rejoindre" className={s.mobileJoinBtn} onClick={() => setMobileMenuOpen(false)}>
-            <ShieldCheck />
-            Rejoindre PHASE III
-          </Link>
-        </div>
-      </div>
+          <div className={s.mobileMenuFooter}>
+            <Link to="/rejoindre" className={s.mobileJoinBtn} onClick={() => setMobileMenuOpen(false)}>
+              <ShieldCheck />
+              Rejoindre PHASE III
+            </Link>
+          </div>
+        </div>,
+        document.body
+      )}
     </header>
   );
 }
