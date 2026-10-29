@@ -7,14 +7,15 @@ export default {
         'xs': '475px',
       },
       fontFamily: {
-        'archivo': ['Archivo', 'Arial Black', 'sans-serif'],
-        'inter-tight': ['Inter Tight', 'Helvetica Neue', 'sans-serif'],
+        // Polices PHASE III (servies en local, voir src/index.css)
+        'archivo': ['Anybody', 'Arial Black', 'sans-serif'],
+        'inter-tight': ['Inter', 'Helvetica Neue', 'sans-serif'],
         'jetbrains': ['JetBrains Mono', 'Menlo', 'monospace'],
-        'fraunces': ['Fraunces', 'Georgia', 'serif'],
+        'fraunces': ['Inter', 'Helvetica Neue', 'sans-serif'],
         // Legacy aliases — prevent breaking ~58 files that use font-montserrat / font-inter
-        'montserrat': ['Archivo', 'Arial Black', 'sans-serif'],
-        'inter': ['Inter Tight', 'Helvetica Neue', 'sans-serif'],
-        'playfair': ['Fraunces', 'Georgia', 'serif'],
+        'montserrat': ['Anybody', 'Arial Black', 'sans-serif'],
+        'inter': ['Inter', 'Helvetica Neue', 'sans-serif'],
+        'playfair': ['Inter', 'Helvetica Neue', 'sans-serif'],
       },
       letterSpacing: {
         'archivo': '-0.03em',

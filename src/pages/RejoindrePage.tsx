@@ -15,7 +15,7 @@ export default function RejoindrePage() {
         </motion.h1>
         <motion.div className={s.heroRule} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} />
         <motion.p className={s.heroDeck} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.8 }}>
-          Thinkerview repose sur une communauté de citoyens bénévoles. Voici comment contribuer.
+          Voici comment contribuer à PHASE III.
         </motion.p>
       </section>
 

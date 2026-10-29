@@ -1,6 +1,32 @@
 .hero { max-width: var(--max); margin: 0 auto; padding: 64px var(--side) 0; }
-.kicker { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #8A8780; margin: 0 0 28px; }
-.heroTitle { font-family: var(--display); font-weight: 900; font-size: clamp(26px, 5vw, 56px); letter-spacing: -0.03em; color: #0A0A0A; margin: 0; }
-.heroRule { height: 2px; background: #0A0A0A; margin: 24px 0; transform-origin: left; }
-.heroDeck { font-family: var(--body); font-size: 14px; color: #8A8780; line-height: 1.55; max-width: 540px; margin: 0; }
+.kicker { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #64616D; margin: 0 0 28px; }
+.heroTitle { font-family: var(--display); font-weight: 900; font-size: clamp(26px, 5vw, 56px); letter-spacing: -0.03em; color: #0E0D14; margin: 0; }
+.heroRule { height: 2px; background: #0E0D14; margin: 24px 0; transform-origin: left; }
+.heroDeck { font-family: var(--body); font-size: 14px; color: #64616D; line-height: 1.55; max-width: 540px; margin: 0; }
+
+/* ── L'esprit PHASE III (bandeau noir, comme la pré-intro du dossier) ── */
+.esprit { background: #0E0D14; color: #FFFFFF; margin-top: 64px; }
+.espritInner { max-width: var(--max); margin: 0 auto; padding: clamp(48px, 7vw, 96px) var(--side); }
+.espritLabel { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.62); }
+.espritTitre { margin: 16px 0 0; font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.4vw, 48px); line-height: 0.98; letter-spacing: -0.025em; text-transform: uppercase; text-wrap: balance; max-width: 22ch; }
+.espritTitre em { font-style: normal; color: var(--lime); }
+.espritTexte { margin: 20px 0 0; font-family: var(--body); font-size: 17px; line-height: 1.62; color: rgba(255, 255, 255, 0.78); max-width: 60ch; text-wrap: pretty; }
+.raisonsTitre { margin: clamp(44px, 6vw, 80px) 0 0; font-family: var(--display); font-weight: 800; font-size: clamp(24px, 3vw, 40px); line-height: 0.95; letter-spacing: -0.025em; }
+.raisons { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid rgba(255, 255, 255, 0.3); }
+.raison { padding: 24px 22px 28px; border-right: 1px solid rgba(255, 255, 255, 0.3); }
+.raison:last-child { border-right: none; }
+.raisonNum { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--mag-vif); }
+.raisonTitre { display: block; margin-top: 14px; font-family: var(--body); font-weight: 700; font-size: 17px; line-height: 1.3; text-wrap: balance; }
+.raisonTexte { margin: 10px 0 0; font-family: var(--body); font-size: 15px; line-height: 1.55; color: rgba(255, 255, 255, 0.72); text-wrap: pretty; }
+@media (max-width: 1024px) {
+  .raisons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .raison:nth-child(2) { border-right: none; }
+  .raison:nth-child(-n + 2) { border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+}
+@media (max-width: 640px) {
+  .raisons { grid-template-columns: 1fr; }
+  .raison { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+  .raison:last-child { border-bottom: none; }
+}
+
 @media (max-width: 640px) { .hero { padding: 32px var(--side) 0; } .heroTitle { font-size: clamp(22px, 4vw, 36px); } }

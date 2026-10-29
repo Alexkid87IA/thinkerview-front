@@ -24,7 +24,7 @@ export default function Footer() {
         {/* Explorez — tabbed */}
         <section className={s.ftExplore}>
           <header className={s.ftHead}>
-            <span className={s.ftKicker}><span className={s.ftKickerDot} />Tout Thinkerview</span>
+            <span className={s.ftKicker}><span className={s.ftKickerDot} />Tout PHASE III</span>
             <h2 className={s.ftTitle}>Explorez <em>par entrée.</em></h2>
             <p className={s.ftDeck}>Par galaxie, par univers, par format — chaque chemin mène quelque part.</p>
           </header>
@@ -95,7 +95,7 @@ export default function Footer() {
           <div className={`${s.ftPanel} ${footerTab === 'apropos' ? s.ftPanelActive : ''}`}>
             <div className={s.ftGrid3}>
               {[
-                { name: 'La mission', desc: `Thinkerview construit un espace souverain d'information — sans publicité, sans algorithme, sans compromis éditorial.`, href: '/a-propos', cta: 'En savoir plus' },
+                { name: 'La mission', desc: `PHASE III vérifie, enquête, suit l'actualité et publie partout : site, vidéos, réseaux, en plusieurs langues.`, href: '/a-propos', cta: 'En savoir plus' },
                 { name: 'Contact', desc: `Une question, un sujet à proposer, un partenariat — écrivez-nous. Réponse sous 48h.`, href: '/contact', cta: 'Nous écrire' },
                 { name: 'Communauté', desc: `43 271 citoyens vérifiés. Rejoignez un espace de débat sans bots, sans trolls, sans algorithme.`, href: '/rejoindre', cta: 'Rejoindre' },
               ].map(item => (
@@ -152,8 +152,8 @@ export default function Footer() {
         {/* Bottom strip */}
         <div className={s.ftStrip}>
           <div className={s.ftStripLeft}>
-            <img src="/thinkerview-logo.png" alt="" className={s.ftLogo} />
-            <span className={s.ftCopy}>&copy; 2026 Thinkerview &middot; Paris</span>
+            <img src="/phase-iii/icone.svg" alt="" className={s.ftLogo} />
+            <span className={s.ftCopy}>&copy; 2026 PHASE III &middot; la rédaction associée à Thinkerview</span>
           </div>
           <div className={s.ftLegal}>
             {[
@@ -175,7 +175,7 @@ export default function Footer() {
 
         {/* Signature */}
         <div className={s.ftSignature}>
-          <span className={s.ftWordmark}>Think<em>erview</em></span>
+          <img src="/phase-iii/logo-sur-noir.svg" alt="PHASE III" className={s.ftWordmark} />
         </div>
       </div>
     </footer>

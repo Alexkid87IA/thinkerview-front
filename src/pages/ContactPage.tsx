@@ -6,7 +6,7 @@ import s from './ContactPage.module.css';
 export default function ContactPage() {
   return (
     <Layout>
-      <section className={s.hero} aria-label="Contactez ThinkerView">
+      <section className={s.hero} aria-label="Contactez PHASE III">
         <motion.p className={s.kicker} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.1 }}>CONTACT</motion.p>
         <motion.h1 className={s.heroTitle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>Écrivez-nous</motion.h1>
         <motion.div className={s.heroRule} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} />

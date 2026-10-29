@@ -93,13 +93,14 @@ export const GALAXIES: Galaxy[] = [
   },
 ];
 
+// Six points pris le long du dégradé PHASE III : magenta → violet → bleu-vert
 export const PILLAR_COLORS: Record<string, { accent: string; bg: string; border: string }> = {
-  geopolitique:  { accent: '#8B6B4A', bg: 'rgba(139,107,74,0.06)',  border: 'rgba(139,107,74,0.18)' },
-  energie:       { accent: '#7A8B4A', bg: 'rgba(122,139,74,0.06)',  border: 'rgba(122,139,74,0.18)' },
-  politique:     { accent: '#6B5B8A', bg: 'rgba(107,91,138,0.06)',  border: 'rgba(107,91,138,0.18)' },
-  economie:      { accent: '#4A7A8B', bg: 'rgba(74,122,139,0.06)',  border: 'rgba(74,122,139,0.18)' },
-  technologie:   { accent: '#5A6B8B', bg: 'rgba(90,107,139,0.06)', border: 'rgba(90,107,139,0.18)' },
-  souverainete:  { accent: '#8B5A5A', bg: 'rgba(139,90,90,0.06)',   border: 'rgba(139,90,90,0.18)' },
+  geopolitique:  { accent: '#C4176A', bg: 'rgba(196,23,106,0.06)',  border: 'rgba(196,23,106,0.22)' },
+  energie:       { accent: '#A2299B', bg: 'rgba(162,41,155,0.06)',  border: 'rgba(162,41,155,0.22)' },
+  politique:     { accent: '#7F3CCC', bg: 'rgba(127,60,204,0.06)',  border: 'rgba(127,60,204,0.22)' },
+  economie:      { accent: '#584DD2', bg: 'rgba(88,77,210,0.06)',   border: 'rgba(88,77,210,0.22)' },
+  technologie:   { accent: '#2C5EAD', bg: 'rgba(44,94,173,0.06)',   border: 'rgba(44,94,173,0.22)' },
+  souverainete:  { accent: '#006F87', bg: 'rgba(0,111,135,0.06)',   border: 'rgba(0,111,135,0.22)' },
 };
 
 export const SOCIAL_LINKS = [

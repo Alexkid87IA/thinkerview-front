@@ -25,8 +25,9 @@ export default function Header() {
   return (
     <header className={s.header}>
       <div className={s.inner}>
-        <Link to="/" className={s.logo}>
-          <img src="/thinkerview-logo.png" alt="Thinkerview" className={s.logoImg} />
+        <Link to="/home" className={s.logo}>
+          <img src="/phase-iii/logo-sur-blanc.svg" alt="PHASE III" className={s.logoImg} />
+          <span className={s.logoMention}>la rédaction associée à Thinkerview</span>
         </Link>
 
         <nav className={s.nav}>
@@ -142,8 +143,8 @@ export default function Header() {
       {/* Mobile menu */}
       <div className={mobileMenuOpen ? s.mobileMenuOpen : s.mobileMenu}>
         <div className={s.mobileMenuHeader}>
-          <Link to="/" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
-            <img src="/thinkerview-logo.png" alt="Thinkerview" className={s.logoImg} />
+          <Link to="/home" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
+            <img src="/phase-iii/logo-sur-blanc.svg" alt="PHASE III" className={s.logoImg} />
           </Link>
           <button className={s.mobileMenuClose} onClick={() => setMobileMenuOpen(false)} aria-label="Fermer">
             <X />
@@ -174,7 +175,7 @@ export default function Header() {
         <div className={s.mobileMenuFooter}>
           <Link to="/rejoindre" className={s.mobileJoinBtn} onClick={() => setMobileMenuOpen(false)}>
             <ShieldCheck />
-            Rejoindre Thinkerview
+            Rejoindre PHASE III
           </Link>
         </div>
       </div>

@@ -61,7 +61,7 @@ const THREADS: Thread[] = [
       ],
       consensus: "Unanimité sur le retard français : le rapport sénatorial de 2023 a produit 40 recommandations dont 3 appliquées. Le constat est partagé, l'action ne suit pas.",
       questions: ["Quel budget annuel pour un plan câbles souverain ?", "Faut-il nationaliser les atterrissements de câbles ?", "Quelle gouvernance pour les IX français ?"],
-      sources: [{ type: 'Dossier', title: "Souveraineté numérique — Thinkerview" }, { type: 'Interview', title: "Jean-Marc Jancovici — Infrastructures critiques" }],
+      sources: [{ type: 'Dossier', title: "Souveraineté numérique — PHASE III" }, { type: 'Interview', title: "Jean-Marc Jancovici — Infrastructures critiques" }],
     },
   },
   {
@@ -390,7 +390,7 @@ const STATS = [
 
 const POLLS = [
   {
-    question: 'Quel dossier Thinkerview devrait traiter en priorité ?',
+    question: 'Quel dossier PHASE III devrait traiter en priorité ?',
     galaxy: 'technologie' as const, totalVotes: 1847,
     options: [
       { label: "L'IA dans les armées européennes", pct: 34 },
@@ -496,7 +496,7 @@ function AISynthesisBlock({ data, dark }: { data: ThreadAI; dark?: boolean }) {
 
               {data.sources.length > 0 && (
                 <div className={s.aiSources}>
-                  <span className={s.aiSectionLabel}>Sources Thinkerview liées</span>
+                  <span className={s.aiSectionLabel}>Sources liées</span>
                   <div className={s.aiSourceList}>
                     {data.sources.map((src, i) => (
                       <span key={i} className={s.aiSource}>
@@ -846,7 +846,7 @@ export default function ForumPage() {
       <motion.section className={s.verbatim} {...fade} transition={{ duration: 0.6 }}>
         <div className={s.verbatimInner}>
           <span className={s.verbatimMark}>&laquo;</span>
-          <blockquote className={s.verbatimText}>J'ai rejoint Thinkerview parce que je cherchais un espace où les désaccords se règlent par l'argument, pas par l'insulte. Ici, chaque citoyen est vérifié. Chaque débat a des sources. C'est rare.</blockquote>
+          <blockquote className={s.verbatimText}>J'ai rejoint PHASE III parce que je cherchais un espace où les désaccords se règlent par l'argument, pas par l'insulte. Ici, chaque citoyen est vérifié. Chaque débat a des sources. C'est rare.</blockquote>
           <div className={s.verbatimAuthor}><Shield size={11} /><span>Sophie M.</span><span className={s.verbatimBadge}>Citoyenne vérifiée depuis 2023</span></div>
         </div>
       </motion.section>
@@ -857,7 +857,7 @@ export default function ForumPage() {
           <div className={s.sectionHead}><div className={s.chapterMark}><span className={s.chNum}>Ch.06</span><span className={s.chSep}>/</span><span className={s.chLabel}>Calendrier</span></div><h2 className={s.sectionTitle}>Calendrier citoyen</h2></div>
           <div className={s.calendarGrid}>
             {([
-              { label: "Aujourd'hui", color: '#5AA352', items: CALENDAR.today },
+              { label: "Aujourd'hui", color: '#5E7D00', items: CALENDAR.today },
               { label: 'Cette semaine', color: PILLAR_COLORS.technologie.accent, items: CALENDAR.week },
               { label: 'Ce mois', color: PILLAR_COLORS.economie.accent, items: CALENDAR.month },
             ]).map(col => (

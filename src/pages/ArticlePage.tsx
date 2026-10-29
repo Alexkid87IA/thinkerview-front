@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Play, Link2, Clock, User, Calendar } from 'lucide-react';
 import Layout from '../components/layout/Layout';
+import { artCover } from '../lib/artCover';
+import { PILLAR_COLORS } from '../data/galaxies';
 import s from './ArticlePage.module.css';
 
 /* ── Accent color — Souverainete ── */
-const ACCENT = '#8B5A5A';
+const ACCENT = '#006F87';
+
+/* ── Couleur de rubrique des articles liés ── */
+const CATEGORY_ACCENT: Record<string, string> = {
+  Technologie: PILLAR_COLORS.technologie.accent,
+  Souverainete: PILLAR_COLORS.souverainete.accent,
+  Economie: PILLAR_COLORS.economie.accent,
+};
 
 /* ── Animation helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -44,7 +53,6 @@ const RELATED = [
     category: 'Technologie',
     date: '3 mai 2026',
     readTime: '18 min',
-    image: 'https://picsum.photos/seed/osint/600/400',
   },
   {
     id: 2,
@@ -54,7 +62,6 @@ const RELATED = [
     category: 'Souverainete',
     date: '28 avr. 2026',
     readTime: '25 min',
-    image: 'https://picsum.photos/seed/medias/600/400',
   },
   {
     id: 3,
@@ -64,7 +71,6 @@ const RELATED = [
     category: 'Economie',
     date: '21 avr. 2026',
     readTime: '15 min',
-    image: 'https://picsum.photos/seed/presse/600/400',
   },
 ];
 
@@ -426,7 +432,7 @@ export default function ArticlePage() {
       >
         <span className={s.shareLabel}>Partager</span>
         <a
-          href={`https://x.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent('Off Investigation : 30 ans de journalisme — Thinkerview')}`}
+          href={`https://x.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent('Off Investigation : 30 ans de journalisme — PHASE III')}`}
           target="_blank"
           rel="noopener noreferrer"
           className={s.shareBtn}
@@ -523,7 +529,7 @@ export default function ArticlePage() {
             >
               <Link to={`/article/${item.slug}`} className={s.relatedCard}>
                 <img
-                  src={item.image}
+                  src={artCover(item.slug, CATEGORY_ACCENT[item.category] ?? ACCENT)}
                   alt={item.title}
                   className={s.relatedCardImage}
                   loading="lazy"

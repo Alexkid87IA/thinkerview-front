@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Vote, MessageSquare, Radar, ShieldCheck, Menu, X, Play, Newspaper, FolderOpen, ArrowRight, Lock, Bell, Users, ChevronDown } from 'lucide-react';
+import SoutienBand from '../components/layout/SoutienBand';
+import { artCover } from '../lib/artCover';
 import s from './ArcanesPage.module.css';
 
 const SOCIAL_LINKS = [
@@ -163,15 +165,15 @@ const BAROMETRE = {
 };
 
 const ARTICLES_COMPRENDRE = [
-  { slug: 'concentration-medias', category: 'Politique', title: `Concentration des médias : qui possède l'information en France ?`, readTime: '14 min', author: 'Claire Fontaine', img: 'https://picsum.photos/seed/medias-france/400/260' },
-  { slug: 'lobbies-bruxelles', category: 'Politique', title: `Lobbies à Bruxelles : qui influence vraiment les lois européennes ?`, readTime: '15 min', author: 'Marion Leblanc', img: 'https://picsum.photos/seed/lobbies-bruxelles/400/260' },
-  { slug: 'sahel-bilan', category: 'Géopolitique', title: `Sahel : le vrai bilan du retrait français, un an après`, readTime: '16 min', author: 'Marion Leblanc', img: 'https://picsum.photos/seed/sahel-retrait/400/260' },
+  { slug: 'concentration-medias', category: 'Politique', title: `Concentration des médias : qui possède l'information en France ?`, readTime: '14 min', author: 'Claire Fontaine' },
+  { slug: 'lobbies-bruxelles', category: 'Politique', title: `Lobbies à Bruxelles : qui influence vraiment les lois européennes ?`, readTime: '15 min', author: 'Marion Leblanc' },
+  { slug: 'sahel-bilan', category: 'Géopolitique', title: `Sahel : le vrai bilan du retrait français, un an après`, readTime: '16 min', author: 'Marion Leblanc' },
 ];
 
 const ARTICLES_LIRE = [
-  { slug: 'nucleaire-epr2', category: 'Énergie', title: `EPR2 : pourquoi la France mise tout sur le nucléaire de nouvelle génération`, readTime: '9 min', author: 'Thomas Renaud', img: 'https://picsum.photos/seed/epr2-reactor/400/260' },
-  { slug: 'ia-souveraine', category: 'Technologie', title: `IA souveraine : la France peut-elle rattraper les États-Unis ?`, readTime: '10 min', author: 'Thomas Renaud', img: 'https://picsum.photos/seed/ia-france/400/260' },
-  { slug: 'dette-publique-3500', category: 'Économie', title: `3 500 milliards : la dette française est-elle encore soutenable ?`, readTime: '14 min', author: 'Claire Fontaine', img: 'https://picsum.photos/seed/dette-3500/400/260' },
+  { slug: 'nucleaire-epr2', category: 'Énergie', title: `EPR2 : pourquoi la France mise tout sur le nucléaire de nouvelle génération`, readTime: '9 min', author: 'Thomas Renaud' },
+  { slug: 'ia-souveraine', category: 'Technologie', title: `IA souveraine : la France peut-elle rattraper les États-Unis ?`, readTime: '10 min', author: 'Thomas Renaud' },
+  { slug: 'dette-publique-3500', category: 'Économie', title: `3 500 milliards : la dette française est-elle encore soutenable ?`, readTime: '14 min', author: 'Claire Fontaine' },
 ];
 
 const VIDEOS = [
@@ -197,11 +199,11 @@ const LAST_INTERVIEW = {
 };
 
 const DOSSIERS = [
-  { slug: 'guerre-numerique', title: 'La guerre numérique : qui contrôle nos données ?', articleCount: 7, category: 'Technologie', img: 'https://picsum.photos/seed/dossier-tech/600/400' },
-  { slug: 'energie-souveraine', title: 'Énergie souveraine : le pari nucléaire français', articleCount: 5, category: 'Énergie', img: 'https://picsum.photos/seed/dossier-nrj/600/400' },
-  { slug: 'influence-etrangere', title: 'Ingérences : cartographie des opérations d\'influence', articleCount: 9, category: 'Géopolitique', img: 'https://picsum.photos/seed/dossier-geo/600/400' },
-  { slug: 'dette-francaise', title: '3 500 milliards : anatomie de la dette française', articleCount: 6, category: 'Économie', img: 'https://picsum.photos/seed/dossier-dette/600/400' },
-  { slug: 'media-censure', title: 'Médias sous contrôle : enquête sur la censure en France', articleCount: 8, category: 'Politique', img: 'https://picsum.photos/seed/dossier-media/600/400' },
+  { slug: 'guerre-numerique', title: 'La guerre numérique : qui contrôle nos données ?', articleCount: 7, category: 'Technologie' },
+  { slug: 'energie-souveraine', title: 'Énergie souveraine : le pari nucléaire français', articleCount: 5, category: 'Énergie' },
+  { slug: 'influence-etrangere', title: 'Ingérences : cartographie des opérations d\'influence', articleCount: 9, category: 'Géopolitique' },
+  { slug: 'dette-francaise', title: '3 500 milliards : anatomie de la dette française', articleCount: 6, category: 'Économie' },
+  { slug: 'media-censure', title: 'Médias sous contrôle : enquête sur la censure en France', articleCount: 8, category: 'Politique' },
 ];
 
 function catKey(label: string): string {
@@ -220,13 +222,14 @@ const FORUM_THREADS = [
   { slug: 'ia-souverainete', title: `IA souveraine : la France peut-elle encore rattraper les États-Unis ?`, category: 'Souveraineté', replies: 91, participants: 38, lastActivity: 'il y a 3 h', hot: false },
 ];
 
+// Six points pris le long du dégradé PHASE III : magenta → violet → bleu-vert
 const PILLAR_COLORS: Record<string, { accent: string; bg: string; border: string }> = {
-  geopolitique:  { accent: '#8B6B4A', bg: 'rgba(139,107,74,0.06)',  border: 'rgba(139,107,74,0.18)' },
-  energie:       { accent: '#7A8B4A', bg: 'rgba(122,139,74,0.06)',  border: 'rgba(122,139,74,0.18)' },
-  politique:     { accent: '#6B5B8A', bg: 'rgba(107,91,138,0.06)',  border: 'rgba(107,91,138,0.18)' },
-  economie:      { accent: '#4A7A8B', bg: 'rgba(74,122,139,0.06)',  border: 'rgba(74,122,139,0.18)' },
-  technologie:   { accent: '#5A6B8B', bg: 'rgba(90,107,139,0.06)', border: 'rgba(90,107,139,0.18)' },
-  souverainete:  { accent: '#8B5A5A', bg: 'rgba(139,90,90,0.06)',   border: 'rgba(139,90,90,0.18)' },
+  geopolitique:  { accent: '#C4176A', bg: 'rgba(196,23,106,0.06)',  border: 'rgba(196,23,106,0.22)' },
+  energie:       { accent: '#A2299B', bg: 'rgba(162,41,155,0.06)',  border: 'rgba(162,41,155,0.22)' },
+  politique:     { accent: '#7F3CCC', bg: 'rgba(127,60,204,0.06)',  border: 'rgba(127,60,204,0.22)' },
+  economie:      { accent: '#584DD2', bg: 'rgba(88,77,210,0.06)',   border: 'rgba(88,77,210,0.22)' },
+  technologie:   { accent: '#2C5EAD', bg: 'rgba(44,94,173,0.06)',   border: 'rgba(44,94,173,0.22)' },
+  souverainete:  { accent: '#006F87', bg: 'rgba(0,111,135,0.06)',   border: 'rgba(0,111,135,0.22)' },
 };
 
 interface CompArticle { slug: string; title: string; readTime: string; author: string }
@@ -472,8 +475,8 @@ export default function ArcanesPage() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    document.body.style.background = '#F0EDE6';
-    document.body.style.color = '#0A0A0A';
+    document.body.style.background = '#FFFFFF';
+    document.body.style.color = '#0E0D14';
     return () => {
       document.body.style.background = '';
       document.body.style.color = '';
@@ -521,9 +524,10 @@ export default function ArcanesPage() {
       {/* ══════════ HEADER ══════════ */}
       <header className={s.header}>
         <div className={s.inner}>
-          <a href="/arcanes" className={s.logo}>
-            <img src="/thinkerview-logo.png" alt="Thinkerview" className={s.logoImg} />
-          </a>
+          <Link to="/home" className={s.logo}>
+            <img src="/phase-iii/logo-sur-blanc.svg" alt="PHASE III" className={s.logoImg} />
+            <span className={s.logoMention}>la rédaction associée à Thinkerview</span>
+          </Link>
 
           <nav className={s.nav}>
             <div
@@ -643,8 +647,8 @@ export default function ArcanesPage() {
         {/* ── Mobile menu ── */}
         <div className={mobileMenuOpen ? s.mobileMenuOpen : s.mobileMenu}>
           <div className={s.mobileMenuHeader}>
-            <Link to="/" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
-              <img src="/thinkerview-logo.png" alt="Thinkerview" className={s.logoImg} />
+            <Link to="/home" className={s.logo} onClick={() => setMobileMenuOpen(false)}>
+              <img src="/phase-iii/logo-sur-blanc.svg" alt="PHASE III" className={s.logoImg} />
             </Link>
             <button className={s.mobileMenuClose} onClick={() => setMobileMenuOpen(false)} aria-label="Fermer">
               <X />
@@ -681,86 +685,105 @@ export default function ArcanesPage() {
           <div className={s.mobileMenuFooter}>
             <Link to="/rejoindre" className={s.mobileJoinBtn} onClick={() => setMobileMenuOpen(false)}>
               <ShieldCheck />
-              Rejoindre Thinkerview
+              Rejoindre PHASE III
             </Link>
           </div>
         </div>
       </header>
 
-      {/* ══════════ HERO — Brand intro ══════════ */}
-      <section className={s.hero} aria-label="Accueil Thinkerview">
-        <motion.p className={s.kicker} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.1 }}>
-          Portail citoyen souverain
-        </motion.p>
+      <SoutienBand />
 
-        <motion.div className={s.masthead} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
-          <h1 className={s.title}>THINKERVIEW</h1>
-          <div className={s.social}>
-            <span className={s.socialLabel}>Suivez Thinkerview</span>
-            <div className={s.socialIcons}>
-              {SOCIAL_LINKS.map(link => (
-                <a key={link.href} href={link.href} aria-label={link.label} target="_blank" rel="noopener" className={s.socialLink}>
-                  {link.icon}
-                </a>
+      {/* ══════════ HERO — Brand intro ══════════ */}
+      <section className={s.hero} aria-label="Accueil PHASE III">
+        {/* ── Bandeau PHASE III : fils de lumière de la bannière, un seul sort du rang ── */}
+        <div className={s.heroBand}>
+          <img src="/phase-iii/art/fin.webp" alt="" className={s.heroArt} aria-hidden="true" />
+          <div className={s.heroBandInner}>
+            <motion.p className={s.kicker} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.1 }}>
+              Maquette du site · les contenus sont des exemples
+            </motion.p>
+
+            <motion.div className={s.masthead} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
+              <h1 className={s.title}>
+                <span className="sr-only">PHASE III</span>
+                <img src="/phase-iii/logo-sur-noir.svg" alt="" className={s.titleLogo} />
+              </h1>
+              <div className={s.social}>
+                <span className={s.socialLabel}>Suivez PHASE III</span>
+                <div className={s.socialIcons}>
+                  {SOCIAL_LINKS.map(link => (
+                    <a key={link.href} href={link.href} aria-label={link.label} target="_blank" rel="noopener" className={s.socialLink}>
+                      {link.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div className={s.rule} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} />
+
+            <motion.p className={s.heroSous} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }}>
+              La rédaction associée à Thinkerview.
+            </motion.p>
+            <motion.p className={s.tagline} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.8 }}>
+              La revanche de ceux <em>qui pensent autrement.</em>
+            </motion.p>
+            <motion.p className={s.heroLede} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.9 }}>
+              Thinkerview fait les grands entretiens. PHASE III vérifie, enquête, suit l'actualité et publie partout : site, vidéos, réseaux, en plusieurs langues.
+            </motion.p>
+          </div>
+        </div>
+
+        <div className={s.heroBelow}>
+          {/* ── Citation ── */}
+          <motion.div className={s.quoteStrip} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.9 }}>
+            <img src="/einstein.jpg" alt="Albert Einstein" className={s.quoteAvatar} />
+            <blockquote className={s.quoteText}>
+              «&nbsp;Il ne faut pas compter sur ceux qui créent les problèmes pour les résoudre.&nbsp;»
+            </blockquote>
+            <cite className={s.quoteAuthor}>Albert Einstein</cite>
+          </motion.div>
+
+          {/* ── Pillars ── */}
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1 }}>
+            <div className={s.pillars} ref={containerRef}>
+              <AnimatePresence>
+                {indicator && activePillar !== null && (
+                  <motion.div
+                    className={s.slider}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, left: indicator.left, width: indicator.width }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 30, opacity: { duration: 0.12 } }}
+                  />
+                )}
+              </AnimatePresence>
+              {PILLARS.map((p, i) => (
+                <button
+                  key={p.label}
+                  ref={el => { pillarRefs.current[i] = el; }}
+                  className={`${s.pillar}${activePillar === i ? ` ${s.pillarActive}` : ''}`}
+                  onClick={() => setActivePillar(prev => prev === i ? null : i)}
+                >
+                  {p.label}
+                </button>
               ))}
             </div>
-          </div>
-        </motion.div>
-
-        <motion.div className={s.rule} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} />
-
-        <motion.p className={s.tagline} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.8 }}>
-          Zéro bot, zéro manipulation, zéro censure — une communauté de citoyens qui pensent par eux-mêmes.
-        </motion.p>
-
-        {/* ── Citation ── */}
-        <motion.div className={s.quoteStrip} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.9 }}>
-          <img src="/einstein.jpg" alt="Albert Einstein" className={s.quoteAvatar} />
-          <blockquote className={s.quoteText}>
-            «&nbsp;Il ne faut pas compter sur ceux qui créent les problèmes pour les résoudre.&nbsp;»
-          </blockquote>
-          <cite className={s.quoteAuthor}>Albert Einstein</cite>
-        </motion.div>
-
-        {/* ── Pillars ── */}
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1 }}>
-          <div className={s.pillars} ref={containerRef}>
-            <AnimatePresence>
-              {indicator && activePillar !== null && (
-                <motion.div
-                  className={s.slider}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, left: indicator.left, width: indicator.width }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 30, opacity: { duration: 0.12 } }}
-                />
+            <AnimatePresence mode="wait">
+              {activePillar !== null && (
+                <motion.div key={activePillar} className={s.card} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}>
+                  <div className={s.cardInner}>
+                    <span className={s.cardTitle}>{PILLARS[activePillar].title}</span>
+                    <p className={s.cardText}>{PILLARS[activePillar].text}</p>
+                    <a href={`/articles?rubrique=${PILLARS[activePillar].label.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')}`} className={s.cardCta}>
+                      Explorer cette rubrique <ArrowRight />
+                    </a>
+                  </div>
+                </motion.div>
               )}
             </AnimatePresence>
-            {PILLARS.map((p, i) => (
-              <button
-                key={p.label}
-                ref={el => { pillarRefs.current[i] = el; }}
-                className={`${s.pillar}${activePillar === i ? ` ${s.pillarActive}` : ''}`}
-                onClick={() => setActivePillar(prev => prev === i ? null : i)}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-          <AnimatePresence mode="wait">
-            {activePillar !== null && (
-              <motion.div key={activePillar} className={s.card} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}>
-                <div className={s.cardInner}>
-                  <span className={s.cardTitle}>{PILLARS[activePillar].title}</span>
-                  <p className={s.cardText}>{PILLARS[activePillar].text}</p>
-                  <a href={`/articles?rubrique=${PILLARS[activePillar].label.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')}`} className={s.cardCta}>
-                    Explorer cette rubrique <ArrowRight />
-                  </a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ══════════ HERO GRID — 3 colonnes simultanées ══════════ */}
@@ -840,7 +863,7 @@ export default function ArcanesPage() {
               {ARTICLES_COMPRENDRE.map(a => (
                 <a key={a.slug} href={`/article/${a.slug}`} className={s.articleItem}>
                   <div className={s.articleItemThumb}>
-                    <img src={a.img} alt="" className={s.articleItemImg} />
+                    <img src={artCover(a.slug, PILLAR_COLORS[catKey(a.category)].accent)} alt="" className={s.articleItemImg} />
                   </div>
                   <div className={s.articleItemBody}>
                     <span className={s.articleItemCat}>{a.category}</span>
@@ -863,7 +886,7 @@ export default function ArcanesPage() {
               {ARTICLES_LIRE.map(a => (
                 <a key={a.slug} href={`/article/${a.slug}`} className={s.articleItem}>
                   <div className={s.articleItemThumb}>
-                    <img src={a.img} alt="" className={s.articleItemImg} />
+                    <img src={artCover(a.slug, PILLAR_COLORS[catKey(a.category)].accent)} alt="" className={s.articleItemImg} />
                   </div>
                   <div className={s.articleItemBody}>
                     <span className={s.articleItemCat}>{a.category}</span>
@@ -896,7 +919,7 @@ export default function ArcanesPage() {
                 ))}
               </div>
               <a href={`/dossier/${DOSSIERS[activeDossier].slug}`} className={s.classeurBody}>
-                <img src={DOSSIERS[activeDossier].img} alt="" className={s.classeurImg} />
+                <img src={artCover(DOSSIERS[activeDossier].slug, PILLAR_COLORS[catKey(DOSSIERS[activeDossier].category)].accent)} alt="" className={s.classeurImg} />
                 <div className={s.classeurOverlay} />
                 <div className={s.classeurContent}>
                   <span className={s.classeurCat}>{DOSSIERS[activeDossier].category}</span>
@@ -1094,7 +1117,7 @@ export default function ArcanesPage() {
                       <a href={`/article/${featured.slug}`} className={s.compFeatured} style={{ '--pillar-accent': colors.accent } as React.CSSProperties}>
                         <div className={s.compFeaturedCover}>
                           <img
-                            src={`https://picsum.photos/seed/${featured.slug}/800/450`}
+                            src={artCover(featured.slug, colors.accent)}
                             alt=""
                             className={s.compFeaturedCoverImg}
                             loading="lazy"
@@ -1131,7 +1154,7 @@ export default function ArcanesPage() {
                             </div>
                             <div className={s.compListThumb}>
                               <img
-                                src={`https://picsum.photos/seed/${a.slug}/160/104`}
+                                src={artCover(a.slug, colors.accent)}
                                 alt=""
                                 className={s.compListThumbImg}
                                 loading="lazy"
@@ -1232,7 +1255,7 @@ export default function ArcanesPage() {
               <span className={s.chLabel}>La mission</span>
             </div>
             <h2 className={s.sectionTitle}>Un portail citoyen pour <em>comprendre le monde</em>.</h2>
-            <p className={s.sectionDesc}>{`Thinkerview construit un espace souverain d'information — sans publicité, sans algorithme, sans compromis éditorial. Voici ce que vous y trouverez.`}</p>
+            <p className={s.sectionDesc}>{`Montrer ses sources, dire ce qu'on ne sait pas, corriger ses erreurs partout. Voici ce que vous y trouverez.`}</p>
           </div>
 
           <div className={s.missionGrid}>
@@ -1308,9 +1331,9 @@ export default function ArcanesPage() {
       <section className={s.aboutBand}>
         <div className={s.aboutInner}>
           <div className={s.aboutCol}>
-            <h3 className={s.aboutLabel}>{`Qu'est-ce que Thinkerview ?`}</h3>
+            <h3 className={s.aboutLabel}>{`Qu'est-ce que PHASE III ?`}</h3>
             <p className={s.aboutText}>
-              {`ThinkerView est un groupe indépendant issu d'internet, très différent de la plupart des think-tanks qui sont inféodés à des partis politiques ou des intérêts privés.`}
+              {`Un média d'info qui prolonge Thinkerview. Thinkerview fait les grands entretiens. PHASE III vérifie, enquête, suit l'actualité et publie partout : site, vidéos, réseaux, en plusieurs langues.`}
             </p>
             <span className={s.aboutSubLabel}>Suivre la veille</span>
             <div className={s.aboutSocials}>
@@ -1342,7 +1365,7 @@ export default function ArcanesPage() {
           </div>
 
           <div className={s.aboutCol}>
-            <h3 className={s.aboutLabel}>{`S'abonner au podcast`}</h3>
+            <h3 className={s.aboutLabel}>Le podcast Thinkerview</h3>
             <div className={s.aboutPodcasts}>
               <a href="https://podcasts.apple.com/fr/podcast/thinkerview/id1276262046" rel="noopener" className={`${s.podcastBtn} ${s.podcastApple}`}>
                 <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm0 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-2 5.5h4l-.5 5h-3l-.5-5Z" /></svg>
@@ -1364,7 +1387,7 @@ export default function ArcanesPage() {
           {/* ── Explorez — tabbed ── */}
           <section className={s.ftExplore}>
             <header className={s.ftHead}>
-              <span className={s.ftKicker}><span className={s.ftKickerDot} />Tout Thinkerview</span>
+              <span className={s.ftKicker}><span className={s.ftKickerDot} />Tout PHASE III</span>
               <h2 className={s.ftTitle}>Explorez <em>par entrée.</em></h2>
               <p className={s.ftDeck}>Par galaxie, par univers, par format — chaque chemin mène quelque part.</p>
             </header>
@@ -1435,7 +1458,7 @@ export default function ArcanesPage() {
             <div className={`${s.ftPanel} ${footerTab === 'apropos' ? s.ftPanelActive : ''}`}>
               <div className={s.ftGrid3}>
                 {[
-                  { name: 'La mission', desc: `Thinkerview construit un espace souverain d'information — sans publicité, sans algorithme, sans compromis éditorial.`, href: '/a-propos', cta: 'En savoir plus' },
+                  { name: 'La mission', desc: `PHASE III vérifie, enquête, suit l'actualité et publie partout : site, vidéos, réseaux, en plusieurs langues.`, href: '/a-propos', cta: 'En savoir plus' },
                   { name: 'Contact', desc: `Une question, un sujet à proposer, un partenariat — écrivez-nous. Réponse sous 48h.`, href: '/contact', cta: 'Nous écrire' },
                   { name: 'Communauté', desc: `43 271 citoyens vérifiés. Rejoignez un espace de débat sans bots, sans trolls, sans algorithme.`, href: '/ensemble', cta: 'Rejoindre' },
                 ].map(item => (
@@ -1494,7 +1517,7 @@ export default function ArcanesPage() {
           {/* ── Bottom strip ── */}
           <div className={s.ftStrip}>
             <div className={s.ftStripLeft}>
-              <span className={s.ftCopy}>&copy; 2026 Thinkerview &middot; Paris</span>
+              <span className={s.ftCopy}>&copy; 2026 PHASE III &middot; la rédaction associée à Thinkerview</span>
             </div>
             <div className={s.ftLegal}>
               {[
@@ -1518,7 +1541,7 @@ export default function ArcanesPage() {
 
           {/* ── Signature ── */}
           <div className={s.ftSignature}>
-            <span className={s.ftWordmark}>Think<em>erview</em></span>
+            <img src="/phase-iii/logo-sur-noir.svg" alt="PHASE III" className={s.ftWordmark} />
           </div>
         </div>
       </footer>
