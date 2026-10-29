@@ -17,6 +17,7 @@
   opacity: 1;
 }
 
-.page > * {
+/* L'en-tête garde son position: sticky (Header.module.css) */
+.page > *:not(header) {
   position: relative;
 }

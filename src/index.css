@@ -63,6 +63,8 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    /* clip coupe sans créer de zone de défilement : l'en-tête reste collé en haut */
+    overflow-x: clip;
     /* Une seule graisse par police : pas de faux gras ni de faux italique */
     font-synthesis: none;
   }
@@ -76,6 +78,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* clip coupe sans créer de zone de défilement : l'en-tête reste collé en haut */
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4, h5, h6 {
